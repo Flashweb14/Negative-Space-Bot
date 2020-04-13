@@ -13,3 +13,23 @@ class Player:
                 break
         if not added_item:
             print('Инвентарь полон!')
+
+    def equip_weapon(self, weapon):
+        if self.weapon is None:
+            self.weapon = weapon
+            self.inventory[self.inventory.index(weapon)] = None
+            self.sort_inventory()
+        else:
+            self.inventory[self.inventory.index(weapon)] = self.weapon
+            self.weapon = weapon
+
+    def drop_item(self, item):
+        self.inventory[self.inventory.index(item)] = None
+        self.sort_inventory()
+
+    def sort_inventory(self):
+        for i in range(len(self.inventory)):
+            if i != 0:
+                if self.inventory[i - 1] is None:
+                    self.inventory[i - 1] = self.inventory[i]
+                    self.inventory[i] = None

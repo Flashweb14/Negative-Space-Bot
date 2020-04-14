@@ -1,8 +1,17 @@
 class Player:
     def __init__(self):
+        self.name = 'PlayerName'
         self.hp = 20
         self.weapon = None
-        self.inventory = [None] * 10
+        self.inventory = [None] * 5
+
+        self.strength = 3
+        self.perception = 4
+        self.endurance = 5
+        self.charisma = 8
+        self.intelligence = 7
+        self.agility = 6
+        self.luck = 7
 
     def add_item(self, item):
         added_item = False

@@ -1,6 +1,6 @@
 class Player:
-    def __init__(self):
-        self.name = 'PlayerName'
+    def __init__(self, name):
+        self.name = name
         self.hp = 20
         self.weapon = None
         self.inventory = [None] * 5

@@ -1,9 +1,10 @@
 import telebot
 from RPG.game_classes.base_weapon import BaseWeapon
 from RPG.bot_classes.bot_game import BotGame
-from RPG.consts import MAIN_MENU, INVENTORY, INVENTORY_INFO, ZERO_STATE, NONE_STATE
+from RPG.bot_classes.bot_create_player import BotPlayerCreationMenu
+from RPG.consts import MAIN_MENU, INVENTORY, INVENTORY_INFO, ZERO_STATE, NONE_STATE, REGISTRATION
 
-bot = telebot.TeleBot('1246120529:AAE8WYmn-o2hlOI-bjUl1BM1akLDYjYzI2o')
+bot = telebot.TeleBot('TOKEN')
 bot_game = BotGame(bot)
 
 
@@ -12,6 +13,8 @@ def text_handler(message):
     if message.chat.id in bot_game.games:
         if bot_game.games[message.chat.id].state == ZERO_STATE:
             pass
+        elif bot_game.games[message.chat.id].state == REGISTRATION:
+            bot_game.player_creation_menu.handler(message)
         elif bot_game.games[message.chat.id].state == MAIN_MENU:
             bot_game.main_menu.handler(message)
         elif bot_game.games[message.chat.id].state == INVENTORY:
@@ -28,7 +31,8 @@ def text_handler(message):
             bot_game.games[message.chat.id].player.add_item(riffle)
     elif message.text == '/start':
         bot_game.start_new_game(message)
-        bot_game.games[message.chat.id].state = NONE_STATE
+        bot_game.player_creation_menu.show(message)
+        bot_game.games[message.chat.id].state = REGISTRATION
 
 
 @bot.callback_query_handler(func=lambda call: True)

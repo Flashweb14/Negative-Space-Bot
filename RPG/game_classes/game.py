@@ -3,8 +3,8 @@ from RPG.consts import ZERO_STATE
 
 
 class Game:
-    def __init__(self):
-        self.player = Player()
+    def __init__(self, player_name):
+        self.player = Player(player_name)
         self.inventory_opened = False
         self.chosen_item = None
         self.state = ZERO_STATE

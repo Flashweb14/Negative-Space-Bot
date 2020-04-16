@@ -14,6 +14,8 @@ def text_handler(message):
             pass
         elif bot_game.games[message.chat.id].state == MAIN_MENU:
             bot_game.main_menu.handler(message)
+        elif bot_game.games[message.chat.id].state == INVENTORY:
+            bot.send_message(message.chat.id, 'Не-а, это здесь не работает')
         elif bot_game.games[message.chat.id].state == INVENTORY_INFO:
             bot_game.inventory.item_info_handler(message)
         elif message.text == '/main_menu':

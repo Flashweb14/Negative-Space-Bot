@@ -2,7 +2,7 @@ import telebot
 from RPG.game_classes.base_weapon import BaseWeapon
 from RPG.bot_classes.bot_game import BotGame
 from RPG.bot_classes.bot_create_player import BotPlayerCreationMenu
-from RPG.consts import MAIN_MENU, INVENTORY, INVENTORY_INFO, ZERO_STATE, NONE_STATE, REGISTRATION
+from RPG.consts import MAIN_MENU, INVENTORY, INVENTORY_INFO, ZERO_STATE, NONE_STATE, REGISTRATION, PLAYER_PROFILE
 
 bot = telebot.TeleBot('TOKEN')
 bot_game = BotGame(bot)
@@ -11,16 +11,19 @@ bot_game = BotGame(bot)
 @bot.message_handler(content_types=['text'])
 def text_handler(message):
     if message.chat.id in bot_game.games:
-        if bot_game.games[message.chat.id].state == ZERO_STATE:
+        game = bot_game.games[message.chat.id]
+        if game.state == ZERO_STATE:
             pass
-        elif bot_game.games[message.chat.id].state == REGISTRATION:
+        elif game.state == REGISTRATION:
             bot_game.player_creation_menu.handler(message)
         elif bot_game.games[message.chat.id].state == MAIN_MENU:
             bot_game.main_menu.handler(message)
-        elif bot_game.games[message.chat.id].state == INVENTORY:
+        elif game.state == INVENTORY:
             bot.send_message(message.chat.id, 'Не-а, это здесь не работает')
-        elif bot_game.games[message.chat.id].state == INVENTORY_INFO:
+        elif game.state == INVENTORY_INFO:
             bot_game.inventory.item_info_handler(message)
+        elif game.state == PLAYER_PROFILE:
+            bot_game.player_profile.handler(message)
         elif message.text == '/main_menu':
             bot_game.main_menu.show(message)
             bot_game.games[message.chat.id].state = MAIN_MENU

@@ -4,6 +4,7 @@ class Player:
         self.hp = 20
         self.weapon = None
         self.inventory = [None] * 5
+        self.level = 1
 
         self.strength = 3
         self.perception = 4

@@ -1,6 +1,6 @@
 import telebot
 from RPG.bot_classes.bot_base_handler import BotBaseHandler
-from RPG.consts import INVENTORY
+from RPG.consts import INVENTORY, PLAYER_PROFILE
 
 
 class BotMainMenu(BotBaseHandler):
@@ -22,6 +22,7 @@ class BotMainMenu(BotBaseHandler):
         elif message.text == '📒Журнал':
             pass
         elif message.text == '📟Профиль':
-            pass
+            self.bot_game.player_profile.show(message)
+            self.bot_game.games[message.chat.id].state = PLAYER_PROFILE
         else:
             self.bot_game.bot.send_message(message.chat.id, 'Введено неверное значение')

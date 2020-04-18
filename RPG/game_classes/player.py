@@ -1,5 +1,12 @@
+from RPG.game_states import ZERO_STATE
+
+
 class Player:
     def __init__(self, name):
+        self.inventory_opened = False
+        self.chosen_item = None
+        self.state = ZERO_STATE
+
         self.name = name
         self.hp = 20
         self.weapon = None

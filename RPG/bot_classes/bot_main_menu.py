@@ -1,11 +1,11 @@
 import telebot
 from RPG.bot_classes.bot_base_handler import BotBaseHandler
-from RPG.consts import INVENTORY, PLAYER_PROFILE
+from RPG.game_states import MAIN_MENU
 
 
 class BotMainMenu(BotBaseHandler):
     def __init__(self, bot_game):
-        super().__init__(bot_game)
+        super().__init__(bot_game, MAIN_MENU)
 
     def show(self, message):
         main_menu_keyboard = telebot.types.ReplyKeyboardMarkup(True, True)
@@ -13,16 +13,14 @@ class BotMainMenu(BotBaseHandler):
         main_menu_keyboard.row('📒Журнал', '📟Профиль')
         self.bot_game.bot.send_message(message.chat.id, 'Главное меню', reply_markup=main_menu_keyboard)
 
-    def handler(self, message):
+    def handle(self, message):
         if message.text == '🎒Инвентарь':
-            self.bot_game.inventory.show(message)
-            self.bot_game.games[message.chat.id].state = INVENTORY
+            self.bot_game.inventory.start(message)
         elif message.text == '⛑Снаряжение':
             pass
         elif message.text == '📒Журнал':
             pass
         elif message.text == '📟Профиль':
-            self.bot_game.player_profile.show(message)
-            self.bot_game.games[message.chat.id].state = PLAYER_PROFILE
+            self.bot_game.player_profile.start(message)
         else:
             self.bot_game.bot.send_message(message.chat.id, 'Введено неверное значение')

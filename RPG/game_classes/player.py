@@ -6,6 +6,7 @@ class Player:
         self.inventory_opened = False
         self.chosen_item = None
         self.state = ZERO_STATE
+        self.current_location = None
 
         self.name = name
         self.hp = 20

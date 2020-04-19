@@ -29,4 +29,4 @@ class BotPlayerProfile(BotBaseHandler):
         if message.text == '⬅Назад':
             self.bot_game.main_menu.start(message)
         else:
-            self.bot_game.bot.send_message(message.chat.it, 'Туты так низзя')
+            self.bot_game.bot.send_message(message.chat.id, 'Туты так низзя')

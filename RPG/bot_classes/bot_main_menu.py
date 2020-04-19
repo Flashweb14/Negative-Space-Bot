@@ -11,6 +11,7 @@ class BotMainMenu(BotBaseHandler):
         main_menu_keyboard = telebot.types.ReplyKeyboardMarkup(True, True)
         main_menu_keyboard.row('🎒Инвентарь', '⛑Снаряжение')
         main_menu_keyboard.row('📒Журнал', '📟Профиль')
+        main_menu_keyboard.row('👀Осмотреться')
         self.bot_game.bot.send_message(message.chat.id, 'Главное меню', reply_markup=main_menu_keyboard)
 
     def handle(self, message):
@@ -22,5 +23,7 @@ class BotMainMenu(BotBaseHandler):
             pass
         elif message.text == '📟Профиль':
             self.bot_game.player_profile.start(message)
+        elif message.text == '👀Осмотреться':
+            self.bot_game.players[message.chat.id].current_location.start(message)
         else:
             self.bot_game.bot.send_message(message.chat.id, 'Введено неверное значение')

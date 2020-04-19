@@ -1,6 +1,7 @@
 import telebot
 from RPG.bot_classes.bot_game import BotGame
-from RPG.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, ZERO_STATE, NONE_STATE, REGISTRATION, PLAYER_PROFILE
+from RPG.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, ZERO_STATE, NONE_STATE, REGISTRATION, PLAYER_PROFILE, \
+    MAIN_STREET, RUINED_HOUSE
 
 bot = telebot.TeleBot('TOKEN')
 bot_game = BotGame(bot)
@@ -22,6 +23,10 @@ def text_handle(message):
             bot_game.inventory.item_info_handle(message)
         elif game.state == PLAYER_PROFILE:
             bot_game.player_profile.handle(message)
+        elif game.state == MAIN_STREET:
+            bot_game.main_street_location.handle(message)
+        elif game.state == RUINED_HOUSE:
+            bot_game.ruined_house_location.handle(message)
         elif message.text == '/main_menu':
             bot_game.main_menu.show(message)
             bot_game.players[message.chat.id].state = MAIN_MENU

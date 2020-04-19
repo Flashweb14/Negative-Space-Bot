@@ -3,6 +3,8 @@ from RPG.bot_classes.bot_inventory_item_info import BotInventoryItemInfo
 from RPG.bot_classes.bot_main_menu import BotMainMenu
 from RPG.bot_classes.bot_create_player import BotPlayerCreationMenu
 from RPG.bot_classes.bot_player_profile import BotPlayerProfile
+from RPG.bot_classes.locations.main_street import MainStreetLocation
+from RPG.bot_classes.locations.ruined_house import RuinedHouseLocation
 from RPG.game_classes.player import Player
 
 
@@ -16,5 +18,9 @@ class BotGame:
         self.inventory_item_info = BotInventoryItemInfo(self)
         self.player_profile = BotPlayerProfile(self)
 
+        self.main_street_location = MainStreetLocation(self)
+        self.ruined_house_location = RuinedHouseLocation(self)
+
     def start_new_game(self, command):
         self.players[command.chat.id] = Player(None)
+        self.players[command.chat.id].current_location = self.main_street_location

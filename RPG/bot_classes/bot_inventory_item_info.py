@@ -7,15 +7,19 @@ class BotInventoryItemInfo(BotBaseHandler):
     def __init__(self, bot_game):
         super().__init__(bot_game, INVENTORY_INFO)
 
+    def start(self, call):
+        self.bot_game.players[call.message.chat.id].state = self.game_state
+        self.show(call)
+
     def show(self, call):
         item = self.bot_game.players[call.message.chat.id].inventory[int(call.data)]
         self.bot_game.players[call.message.chat.id].chosen_item = item
         if item is not None:
             if item.type == 'weapon':
                 item_info = f'*{item.name}* \n' \
-                            f'Урон: _{item.damage}_ \n' \
-                            f'Прочность: _{item.durability}/{item.max_durability}_ \n' \
-                            f'Тип боеприпасов: _{item.ammo_type}_'
+                            f'_🗡Урон_: {item.damage} \n' \
+                            f'_🛠Прочность_: {item.durability}/{item.max_durability} \n' \
+                            f'_🔋Тип боеприпасов_: {item.ammo_type}'
                 action_keyboard = telebot.types.ReplyKeyboardMarkup(True, True, row_width=2)
                 action_keyboard.row('✔Экипировать', '✖Выбросить')
                 action_keyboard.row('⬅Назад')
@@ -35,6 +39,5 @@ class BotInventoryItemInfo(BotBaseHandler):
         elif message.text == '✖Выбросить':
             self.bot_game.players[message.chat.id].drop_item(self.bot_game.players[message.chat.id].chosen_item)
             self.bot_game.inventory.start(message)
-            self.show(message)
         elif message.text == '⬅Назад':
             self.bot_game.inventory.start(message)

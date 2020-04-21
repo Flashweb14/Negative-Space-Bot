@@ -16,11 +16,17 @@ class MainStreetLocation(BaseLocation):
         reply_keyboard.row('📟Главное меню')
         self.bot_game.bot.send_message(message.chat.id, self.show_message, parse_mode='Markdown',
                                        reply_markup=reply_keyboard)
+        for player_id in self.bot_game.players:
+            if player_id != message.chat.id and self.bot_game.players[player_id].state == self.game_state:
+                self.bot_game.bot.send_message(player_id, f'Ты видишь как на эту же главную улицу заходит игрок с'
+                                                          f' именем {self.bot_game.players[player_id].name}')
+                self.bot_game.bot.send_message(message.chat.id, f'Ты видишь как на этой же улице уже находится игрок '
+                                                                f'с именем {self.bot_game.players[player_id].name}')
 
     def handle(self, message):
         if message.text == '👳🏾‍♂️Торговец':
             self.bot_game.bot.send_message(message.chat.id, 'К нему пока нельзя')
         elif message.text == '🏚Руины':
-            self.bot_game.ruined_house_location.start(message)
+            self.bot_game.ruined_house_location[message.chat.id].start(message)
         elif message.text == '📟Главное меню':
             self.bot_game.main_menu.start(message)

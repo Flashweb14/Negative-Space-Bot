@@ -1,5 +1,6 @@
 from RPG.bot_classes.bot_base_handler import BotBaseHandler
 from RPG.game_states import REGISTRATION
+from RPG.game_classes.base_weapon import BaseWeapon
 
 
 class BotPlayerCreationMenu(BotBaseHandler):

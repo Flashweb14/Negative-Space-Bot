@@ -18,9 +18,14 @@ class BotGame:
         self.inventory_item_info = BotInventoryItemInfo(self)
         self.player_profile = BotPlayerProfile(self)
 
-        self.main_street_location = MainStreetLocation(self)
-        self.ruined_house_location = RuinedHouseLocation(self)
+        self.main_street_location = {}
+        self.ruined_house_location = {}
+
 
     def start_new_game(self, command):
         self.players[command.chat.id] = Player(None)
-        self.players[command.chat.id].current_location = self.main_street_location
+
+        self.main_street_location[command.chat.id] = MainStreetLocation(self)
+        self.ruined_house_location[command.chat.id] = RuinedHouseLocation(self)
+
+        self.players[command.chat.id].current_location = self.main_street_location[command.chat.id]

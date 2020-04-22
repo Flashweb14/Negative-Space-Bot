@@ -18,7 +18,7 @@ class BotInventoryItemInfo(BotBaseHandler):
             if item.type == 'weapon':
                 item_info = f'*{item.name}* \n' \
                             f'_🗡Урон_: {item.damage} \n' \
-                            f'_🛠Прочность_: {item.durability}/{item.max_durability} \n' \
+                            f'_🛠Прочность_: {item.durability}/100 \n' \
                             f'_🔋Тип боеприпасов_: {item.ammo_type}'
                 action_keyboard = telebot.types.ReplyKeyboardMarkup(True, True, row_width=2)
                 action_keyboard.row('✔Экипировать', '✖Выбросить')

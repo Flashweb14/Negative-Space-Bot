@@ -15,7 +15,7 @@ class RuinedHouseLocation(BaseLocation):
                                                          'поддавшись, открывается. Внутри ты находишь старый, '
                                                          'побитый '
                                                          'и перемотанный изолентой лазерный пистолет.',
-                             BaseWeapon('Лазерный пистолет', 15, (100, 100), 'Лазерная батарея', 500))
+                             BaseWeapon('Лазерный пистолет', 15, 100, 'Лазерная батарея', 500))
 
     def show(self, message):
         reply_keyboard = ReplyKeyboardMarkup(True, True)

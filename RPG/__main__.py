@@ -1,7 +1,7 @@
 import telebot
 from RPG.bot_classes.bot_game import BotGame
 from RPG.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, ZERO_STATE, NONE_STATE, REGISTRATION, PLAYER_PROFILE, \
-    MAIN_STREET, RUINED_HOUSE, RUINED_HOUSE_BOX
+    MAIN_STREET, MAIN_STREET_TRADER, MAIN_STREET_TRADER_BUY, MAIN_STREET_TRADER_SELL, RUINED_HOUSE, RUINED_HOUSE_BOX
 
 bot = telebot.TeleBot('TOKEN')
 bot_game = BotGame(bot)
@@ -25,6 +25,12 @@ def text_handle(message):
             bot_game.player_profile.handle(message)
         elif game.state == MAIN_STREET:
             bot_game.main_street_location[message.chat.id].handle(message)
+        elif game.state == MAIN_STREET_TRADER:
+            bot_game.main_street_location[message.chat.id].trader.handle(message)
+        elif game.state == MAIN_STREET_TRADER_BUY:
+            bot.send_message(message.chat.id, 'Не-а, это здесь не работает')
+        elif game.state == MAIN_STREET_TRADER_SELL:
+            bot.send_message(message.chat.id, 'Не-а, это здесь не работает')
         elif game.state == RUINED_HOUSE:
             bot_game.ruined_house_location[message.chat.id].handle(message)
         elif game.state == RUINED_HOUSE_BOX:
@@ -39,8 +45,11 @@ def text_handle(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_handle(call):
-    if bot_game.players[call.message.chat.id].state == INVENTORY:
+    game = bot_game.players[call.message.chat.id]
+    if game.state == INVENTORY:
         bot_game.inventory.handle(call)
+    elif game.state == MAIN_STREET_TRADER_BUY:
+        bot_game.main_street_location[call.message.chat.id].trader.handle_buy(call)
 
 
 bot.polling()

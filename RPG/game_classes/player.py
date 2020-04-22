@@ -13,6 +13,7 @@ class Player:
         self.weapon = None
         self.inventory = [None] * 5
         self.level = 1
+        self.money = 500
 
         self.strength = 3
         self.perception = 4
@@ -29,8 +30,17 @@ class Player:
                 self.inventory[i] = item
                 added_item = True
                 break
-        if not added_item:
-            print('Инвентарь полон!')
+        return added_item
+
+    def buy_item(self, item):
+        if self.money >= item.price:
+            if not self.add_item(item):
+                return False, 'инвентарь полон'
+            else:
+                self.money -= item.price
+                return True, 'Предмет успешно куплен'
+        else:
+            return False, 'недостаточно денег'
 
     def equip_weapon(self, weapon):
         if self.weapon is None:

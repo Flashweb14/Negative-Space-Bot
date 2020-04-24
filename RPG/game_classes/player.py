@@ -32,13 +32,13 @@ class Player:
                 break
         return added_item
 
-    def buy_item(self, item):
+    def buy_item(self, item, trader_factor):
         if self.money >= item.price:
             if not self.add_item(item):
                 return False, 'инвентарь полон'
             else:
-                self.money -= item.price
-                return True, 'Предмет успешно куплен'
+                self.money -= item.price // trader_factor
+                return True, 'Успешно куплено:'
         else:
             return False, 'недостаточно денег'
 

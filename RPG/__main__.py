@@ -1,7 +1,8 @@
 import telebot
 from RPG.bot_classes.bot_game import BotGame
 from RPG.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, ZERO_STATE, NONE_STATE, REGISTRATION, PLAYER_PROFILE, \
-    MAIN_STREET, MAIN_STREET_TRADER, MAIN_STREET_TRADER_BUY, MAIN_STREET_TRADER_SELL, RUINED_HOUSE, RUINED_HOUSE_BOX
+    MAIN_STREET, MAIN_STREET_TRADER, MAIN_STREET_TRADER_BUY, MAIN_STREET_TRADER_SELL, RUINED_HOUSE, RUINED_HOUSE_BOX, \
+    CABIN, CAPTAIN_BRIDGE, CARGO_HOLD
 
 bot = telebot.TeleBot('TOKEN')
 bot_game = BotGame(bot)
@@ -35,6 +36,12 @@ def text_handle(message):
             bot_game.ruined_house_location[message.chat.id].handle(message)
         elif game.state == RUINED_HOUSE_BOX:
             bot_game.ruined_house_location[message.chat.id].box.handle(message)
+        elif game.state == CABIN:
+            bot_game.spaceship[message.chat.id].cabin.handle(message)
+        elif game.state == CAPTAIN_BRIDGE:
+            bot_game.spaceship[message.chat.id].captain_bridge.handle(message)
+        elif game.state == CARGO_HOLD:
+            bot_game.spaceship[message.chat.id].cargo_hold.handle(message)
         elif message.text == '/main_menu':
             bot_game.main_menu.show(message)
             bot_game.players[message.chat.id].state = MAIN_MENU

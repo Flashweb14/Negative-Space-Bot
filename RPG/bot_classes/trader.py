@@ -48,10 +48,10 @@ class Trader(BotBaseHandler):
             self.start(call.message)
         else:
             item = self.stock_products[int(call.data)]
-            bought_message = self.bot_game.players[call.message.chat.id].buy_item(item)
+            bought_message = self.bot_game.players[call.message.chat.id].buy_item(item, self.factor)
             if bought_message[0]:
                 self.stock_products.remove(item)
-                self.bot_game.bot.send_message(call.message.chat.id, bought_message[1])
+                self.bot_game.bot.send_message(call.message.chat.id, f'{bought_message[1]} {item.name}')
             else:
                 self.bot_game.bot.send_message(call.message.chat.id,
                                                f'Не удалось купить {item.name}: {bought_message[1]}')

@@ -5,6 +5,7 @@ from RPG.bot_classes.bot_create_player import BotPlayerCreationMenu
 from RPG.bot_classes.bot_player_profile import BotPlayerProfile
 from RPG.bot_classes.locations.main_street import MainStreetLocation
 from RPG.bot_classes.locations.ruined_house import RuinedHouseLocation
+from RPG.bot_classes.locations.spaceship.spaceship import Spaceship
 from RPG.game_classes.player import Player
 
 
@@ -20,12 +21,13 @@ class BotGame:
 
         self.main_street_location = {}
         self.ruined_house_location = {}
-
+        self.spaceship = {}
 
     def start_new_game(self, command):
         self.players[command.chat.id] = Player(None)
 
         self.main_street_location[command.chat.id] = MainStreetLocation(self)
         self.ruined_house_location[command.chat.id] = RuinedHouseLocation(self)
+        self.spaceship[command.chat.id] = Spaceship(self)
 
-        self.players[command.chat.id].current_location = self.main_street_location[command.chat.id]
+        self.players[command.chat.id].current_location = self.spaceship[command.chat.id].cabin

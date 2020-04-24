@@ -14,7 +14,7 @@ class MainStreetLocation(BaseLocation):
         stock_products = [BaseWeapon('Лазерная винтовка', 15, 100, 'Лазерная батарея', 500),
                           BaseWeapon('Старое ружьё', 15, 100, 'Дробь', 150)]
         self.trader = Trader(self.bot_game, MAIN_STREET_TRADER, MAIN_STREET_TRADER_BUY, MAIN_STREET_TRADER_SELL,
-                             'Ассортимент', stock_products, stock_products, 1)
+                             'Ты подходишь к лавке, чтобы поторговаться', stock_products, stock_products, 1)
 
     def show(self, message):
         reply_keyboard = ReplyKeyboardMarkup(True, True)

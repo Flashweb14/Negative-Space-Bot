@@ -18,7 +18,7 @@ class CaptainBridge(BaseLocation):
 
     def handle(self, message):
         if message.text == '📟Бортовой компьютер':
-            pass
+            self.spaceship.computer.start(message)
         elif message.text == '🛏Личная каюта':
             self.spaceship.cabin.start(message)
         elif message.text == '📦Грузовой отсек':

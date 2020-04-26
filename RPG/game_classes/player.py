@@ -7,6 +7,8 @@ class Player:
         self.chosen_item = None
         self.state = ZERO_STATE
         self.current_location = None
+        self.current_planet = None
+        self.opened_planets = []
 
         self.name = name
         self.hp = 20

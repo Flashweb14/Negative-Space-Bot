@@ -22,16 +22,44 @@ class Computer(BotBaseHandler):
         self.bot_game.bot.send_message(message.chat.id,
                                        f"_Spaceship Minisoft console 3.8.2 _ {str(datetime.today())[:-7]}",
                                        parse_mode='Markdown')
-        self.bot_game.bot.send_message(message.chat.id, '_Type "help" command to get the command list_',
+        self.bot_game.bot.send_message(message.chat.id, '_Введите "help", чтобы получить список основынх команд_',
                                        parse_mode='Markdown')
 
     def handle(self, message):
         if message.text == 'help':
             self.bot_game.bot.send_message(message.chat.id,
-                                           '*ftp --ls -n <PLANET NAME>* _- set route to the chosen planet_ \n'
-                                           '*sps qm --inf -m* _- check spaceship equipment and info_ \n'
-                                           '*q* _- close Spaceship Minisoft console_',
+                                           '*srp <ИМЯ ПЛАНЕТЫ>* _- установить маршрут на выбранную планету_ \n'
+                                           '*sps inf eqp* _- посмотреть информацию о корабле и его снаряжении_ \n'
+                                           '*cpi <ИМЯ ПЛАНЕТЫ>* _- посмотреть информацию о планете_ \n'
+                                           '*pln* _- вывести список ближайших планет_ \n'
+                                           '*plo* _- вывести спиок открытых планет_ \n'
+                                           '*q* _- закрыть консоль Spaceship Minisoft_',
                                            parse_mode='Markdown')
+        elif message.text.startswith('srp'):
+            planet_name = message.text[4:].strip()
+            self.bot_game.bot.send_message(message.chat.id, f'Вы успешно прибыли на планету {planet_name}')
+            self.bot_game.players[message.chat.id].current_planet = planet_name.lower()
+        elif message.text.strip() == 'sps inf eqp':
+            self.bot_game.bot.send_message(message.chat.id, self.spaceship.get_info(), parse_mode='Markdown')
+        elif message.text.startswith('cpi'):
+            planet_name = message.text[4:].strip()
+            self.bot_game.bot.send_message(message.chat.id,
+                                           self.bot_game.planets[planet_name.lower()][message.chat.id].get_info(),
+                                           parse_mode='Markdown')
+        elif message.text.strip() == 'pln':  # TODO other planets
+            if not self.bot_game.players[message.chat.id].current_planet:
+                self.bot_game.bot.send_message(message.chat.id, '🌎*Ближайшие планеты*\n'
+                                                                '       - Эстрад',
+                                               parse_mode='Markdown')
+        elif message.text.strip() == 'plo':
+            if self.bot_game.players[message.chat.id].opened_planets:
+                opened_planets = '      -' + '\n      - '.join(self.bot_game.players[message.chat.id].opened_planets)
+                self.bot_game.bot.send_message(message.chat.id, f'🌎*Открытые планеты*\n'
+                                                                f'{opened_planets}',
+                                               parse_mode='Markdown')
+            else:
+                self.bot_game.bot.send_message(message.chat.id, 'Вы пока не открыли ни одной планеты.',
+                                               parse_mode='Markdown')
         elif message.text == 'q':
             self.bot_game.bot.send_message(message.chat.id, '_Closing terminal..._',
                                            parse_mode='Markdown')
@@ -40,3 +68,5 @@ class Computer(BotBaseHandler):
                                            parse_mode='Markdown')
             sleep(1)
             self.spaceship.captain_bridge.start(message)
+        else:
+            self.bot_game.bot.send_message(message.chat.id, 'Введена неизвестная команда. Попробуйте ещё раз.')

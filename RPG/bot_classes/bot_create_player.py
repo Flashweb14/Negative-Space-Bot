@@ -18,5 +18,4 @@ class BotPlayerCreationMenu(BotBaseHandler):
                                                                 f'попробуй другое')
         if not name_taken:
             self.bot_game.players[message.chat.id].name = message.text
-            self.bot_game.bot.send_message(message.chat.id, f'Добро пожаловать в игру, {message.text}')
-            self.bot_game.main_menu.start(message)
+            self.bot_game.spaceship_creation_menu.start(message)

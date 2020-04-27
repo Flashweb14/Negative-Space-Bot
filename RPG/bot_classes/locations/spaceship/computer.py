@@ -12,13 +12,13 @@ class Computer(BotBaseHandler):
 
     def show(self, message):
         self.bot_game.bot.send_message(message.chat.id, "Ты подходишь к бортовому компьютеру и запускаешь его")
-        sleep(1)
+        # sleep(1)
         self.bot_game.bot.send_message(message.chat.id, "_Spaceship Minisoft console: starting._",
                                        parse_mode='Markdown')
-        sleep(1)
+        # sleep(1)
         self.bot_game.bot.send_message(message.chat.id, "_Loading..._",
                                        parse_mode='Markdown')
-        sleep(2)
+        # sleep(2)
         self.bot_game.bot.send_message(message.chat.id,
                                        f"_Spaceship Minisoft console 3.8.2 _ {str(datetime.today())[:-7]}",
                                        parse_mode='Markdown')
@@ -36,16 +36,24 @@ class Computer(BotBaseHandler):
                                            '*q* _- закрыть консоль Spaceship Minisoft_',
                                            parse_mode='Markdown')
         elif message.text.startswith('srp'):
-            planet_name = message.text[4:].strip()
-            self.bot_game.bot.send_message(message.chat.id, f'Вы успешно прибыли на планету {planet_name}')
-            self.bot_game.players[message.chat.id].current_planet = planet_name.lower()
+            planet_name = message.text[4:].strip().capitalize()
+            for planet in self.bot_game.planets:
+                if planet[message.chat.id].name == planet_name:
+                    self.bot_game.players[message.chat.id].current_planet = planet[message.chat.id]
+                    self.bot_game.bot.send_message(message.chat.id, f'Вы успешно прибыли на планету {planet_name}')
+                else:
+                    self.bot_game.bot.send_message(message.chat.id, 'Невозможно проложить маршрут к данной планете. '
+                                                                    'Причина: планета не найдена')
         elif message.text.strip() == 'sps inf eqp':
             self.bot_game.bot.send_message(message.chat.id, self.spaceship.get_info(), parse_mode='Markdown')
         elif message.text.startswith('cpi'):
-            planet_name = message.text[4:].strip()
-            self.bot_game.bot.send_message(message.chat.id,
-                                           self.bot_game.planets[planet_name.lower()][message.chat.id].get_info(),
-                                           parse_mode='Markdown')
+            planet_name = message.text[4:].strip().capitalize()
+            for planet in self.bot_game.planets:
+                if planet[message.chat.id].name == planet_name:
+                    self.bot_game.bot.send_message(message.chat.id, planet[message.chat.id].get_info(),
+                                                   parse_mode='Markdown')
+                else:
+                    self.bot_game.bot.send_message(message.chat.id, 'Не удалось найти сведений о данной планете.')
         elif message.text.strip() == 'pln':  # TODO other planets
             if not self.bot_game.players[message.chat.id].current_planet:
                 self.bot_game.bot.send_message(message.chat.id, '🌎*Ближайшие планеты*\n'

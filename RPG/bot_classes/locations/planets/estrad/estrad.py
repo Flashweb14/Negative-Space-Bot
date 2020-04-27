@@ -1,5 +1,6 @@
 from RPG.bot_classes.locations.planets.base_planet import BasePlanet
 from RPG.bot_classes.locations.planets.estrad.estrad_port import EstradPort
+from RPG.bot_classes.locations.planets.estrad.estrad_security_soldier import EstradSecuritySoldier
 
 
 class Estrad(BasePlanet):
@@ -11,6 +12,7 @@ class Estrad(BasePlanet):
                          'Федерации.')
         self.bot_game = bot_game
         self.port = EstradPort(bot_game, self)
+        self.security_soldier = EstradSecuritySoldier(bot_game, self)
 
     def start(self, message):
         if self.name not in self.bot_game.players[message.chat.id].opened_planets:

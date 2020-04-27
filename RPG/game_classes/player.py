@@ -15,12 +15,12 @@ class Player:
         self.weapon = None
         self.inventory = [None] * 5
         self.level = 1
-        self.money = 500
+        self.money = 249
 
         self.strength = 3
         self.perception = 4
         self.endurance = 5
-        self.charisma = 8
+        self.charisma = 3
         self.intelligence = 7
         self.agility = 6
         self.luck = 7

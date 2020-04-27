@@ -12,7 +12,6 @@ class CaptainBridge(BaseLocation):
                                                                          'главной панели управления ты видишь '
                                                                          'интерфейс управления бортовым компьютером')
         self.spaceship = spaceship
-        self.reply_keyboard = ReplyKeyboardMarkup(True, True)
         self.reply_keyboard.row('📟Бортовой компьютер', '🛏Личная каюта')
         self.reply_keyboard.row('📦Грузовой отсек', '👣Выйти из корабля')
         self.reply_keyboard.row('📟Главное меню')
@@ -29,8 +28,7 @@ class CaptainBridge(BaseLocation):
                 self.bot_game.bot.send_message(message.chat.id, 'В открытый космос?0_о Не лучшая идея.',
                                                reply_markup=self.reply_keyboard)
             else:
-                self.bot_game.planets[self.bot_game.players[message.chat.id].current_planet][message.chat.id].start(
-                    message)
+                self.bot_game.players[message.chat.id].current_planet.start(message)
         elif message.text == '📟Главное меню':
             self.bot_game.main_menu.start(message)
         else:

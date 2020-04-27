@@ -1,3 +1,4 @@
+from telebot.types import ReplyKeyboardMarkup
 from RPG.bot_classes.bot_base_handler import BotBaseHandler
 
 
@@ -8,7 +9,7 @@ class BaseLocation(BotBaseHandler):
         self.description = description
         self.show_message = f'*{self.name}*\n' \
                             f'{self.description}'
-        self.reply_keyboard = None
+        self.reply_keyboard = ReplyKeyboardMarkup(True, True)
 
     def start(self, message):
         self.bot_game.players[message.chat.id].state = self.game_state

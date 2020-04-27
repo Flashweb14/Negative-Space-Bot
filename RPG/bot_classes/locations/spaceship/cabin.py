@@ -11,7 +11,6 @@ class Cabin(BaseLocation):
                                                           'В небольшом иллюминаторе ты наблюдаешь бескрайние дали '
                                                           'космоса.')
         self.spaceship = spaceship
-        self.reply_keyboard = ReplyKeyboardMarkup(True, True)
         self.reply_keyboard.row('🚀Капитанский мостик', '📦Грузовой отсек')
         self.reply_keyboard.row('👣Выйти из корабля', '📟Главное меню')
 

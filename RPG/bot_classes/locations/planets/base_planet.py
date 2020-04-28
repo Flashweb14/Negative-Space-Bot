@@ -8,6 +8,6 @@ class BasePlanet:
                f'{self.description}'
 
     def start(self, message):
-        if self.name not in self.bot_game.players[message.chat.id].opened_planets:
-            self.bot_game.players[message.chat.id].opened_planets.append(self.name)
+        if self.name not in self.game.players[message.chat.id].opened_planets:
+            self.game.players[message.chat.id].opened_planets.append(self.name)
         self.port.start(message)

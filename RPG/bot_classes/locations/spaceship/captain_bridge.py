@@ -4,8 +4,8 @@ from RPG.bot_classes.locations.base_location import BaseLocation
 
 
 class CaptainBridge(BaseLocation):
-    def __init__(self, bot_game, spaceship):
-        super().__init__(bot_game, CAPTAIN_BRIDGE, 'Капитанский мостик', 'Ты выходишь на капитанский мостик, '
+    def __init__(self, game, spaceship):
+        super().__init__(game, CAPTAIN_BRIDGE, 'Капитанский мостик', 'Ты выходишь на капитанский мостик, '
                                                                          'по всюду виднеются различные элементы '
                                                                          'управления кораблём. В большой панорамный '
                                                                          'иллюминатор открыватеся вид на галактику. На '
@@ -24,12 +24,12 @@ class CaptainBridge(BaseLocation):
         elif message.text == '📦Грузовой отсек':
             self.spaceship.cargo_hold.start(message)
         elif message.text == '👣Выйти из корабля':
-            if not self.bot_game.players[message.chat.id].current_planet:
-                self.bot_game.bot.send_message(message.chat.id, 'В открытый космос?0_о Не лучшая идея.',
+            if not self.game.players[message.chat.id].current_planet:
+                self.game.bot.send_message(message.chat.id, 'В открытый космос?0_о Не лучшая идея.',
                                                reply_markup=self.reply_keyboard)
             else:
-                self.bot_game.players[message.chat.id].current_planet.start(message)
+                self.game.players[message.chat.id].current_planet.start(message)
         elif message.text == '📟Главное меню':
-            self.bot_game.main_menu.start(message)
+            self.game.main_menu.start(message)
         else:
             self.show_input_error(message)

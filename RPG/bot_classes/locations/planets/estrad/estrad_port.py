@@ -4,8 +4,8 @@ from RPG.bot_classes.locations.base_location import BaseLocation
 
 
 class EstradPort(BaseLocation):
-    def __init__(self, bot_game, estrad):
-        super().__init__(bot_game, ESTRAD_PORT, 'Порт Эстрада', 'Ты высаживаешься на заросшую джунглями планету, '
+    def __init__(self, game, estrad):
+        super().__init__(game, ESTRAD_PORT, 'Порт Эстрада', 'Ты высаживаешься на заросшую джунглями планету, '
                                                                 'здесь очень влажно, а плотный туман ограничивает твоё '
                                                                 'поле зрения парой метров. Судя по символике,'
                                                                 ' посадочная '
@@ -16,6 +16,6 @@ class EstradPort(BaseLocation):
 
     def handle(self, message):
         if message.text == '🚀Назад на корабль':
-            self.bot_game.spaceship[message.chat.id].cabin.start(message)
+            self.game.spaceship[message.chat.id].cabin.start(message)
         else:
             self.estrad.security_soldier.start(message)

@@ -5,15 +5,15 @@ from RPG.bot_classes.locations.spaceship.computer import Computer
 
 
 class Spaceship:
-    def __init__(self, bot_game):
+    def __init__(self, game):
         self.name = "NAME"
         self.hp = 100
         self.cargo = 0
 
-        self.cabin = Cabin(bot_game, self)
-        self.captain_bridge = CaptainBridge(bot_game, self)
-        self.cargo_hold = CargoHold(bot_game, self)
-        self.computer = Computer(bot_game, self)
+        self.cabin = Cabin(game, self)
+        self.captain_bridge = CaptainBridge(game, self)
+        self.cargo_hold = CargoHold(game, self)
+        self.computer = Computer(game, self)
 
     def get_info(self):
         info = f'🚀*{self.name}*\n' \

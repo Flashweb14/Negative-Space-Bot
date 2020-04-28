@@ -1,24 +1,24 @@
-from RPG.bot_classes.bot_inventory import BotInventory
-from RPG.bot_classes.bot_inventory_item_info import BotInventoryItemInfo
-from RPG.bot_classes.bot_main_menu import BotMainMenu
-from RPG.bot_classes.bot_create_player import BotPlayerCreationMenu
-from RPG.bot_classes.create_spaceship import SpaceshipCreationMenu
-from RPG.bot_classes.bot_player_profile import BotPlayerProfile
+from RPG.bot_classes.main_menu.inventory import Inventory
+from RPG.bot_classes.main_menu.inventory_item_info import InventoryItemInfo
+from RPG.bot_classes.main_menu.main_menu import MainMenu
+from RPG.bot_classes.start_game_menus.create_player import PlayerCreationMenu
+from RPG.bot_classes.start_game_menus.create_spaceship import SpaceshipCreationMenu
+from RPG.bot_classes.main_menu.player_profile import PlayerProfile
 from RPG.bot_classes.locations.spaceship.spaceship import Spaceship
 from RPG.bot_classes.locations.planets.estrad.estrad import Estrad
 from RPG.game_classes.player import Player
 
 
-class BotGame:
+class Game:
     def __init__(self, bot):
         self.players = {}
         self.bot = bot
-        self.player_creation_menu = BotPlayerCreationMenu(self)
+        self.player_creation_menu = PlayerCreationMenu(self)
         self.spaceship_creation_menu = SpaceshipCreationMenu(self)
-        self.main_menu = BotMainMenu(self)
-        self.inventory = BotInventory(self)
-        self.inventory_item_info = BotInventoryItemInfo(self)
-        self.player_profile = BotPlayerProfile(self)
+        self.main_menu = MainMenu(self)
+        self.inventory = Inventory(self)
+        self.inventory_item_info = InventoryItemInfo(self)
+        self.player_profile = PlayerProfile(self)
 
         self.spaceship = {}
         self.estrad = {}

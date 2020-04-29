@@ -1,20 +1,23 @@
 from RPG.bot_classes.locations.planets.base_planet import BasePlanet
 from RPG.bot_classes.locations.planets.estrad.estrad_port import EstradPort
 from RPG.bot_classes.locations.planets.estrad.estrad_security_soldier import EstradSecuritySoldier
+from RPG.bot_classes.locations.planets.estrad.estrad_colony import EstradColony
 
 
 class Estrad(BasePlanet):
-    def __init__(self, game):
+    def __init__(self, game, player):
         super().__init__('Эстрад',
                          'Это небольшая планета на краю галактики, обладающая тропическим климатом. В данный момент '
                          'планета колонизируется Межгалактической Федерацией. Население планеты представлено '
                          'местными аборигенами, представителями расы Эстрадин, и колонизаторами Межгалактической'
                          'Федерации.')
         self.game = game
-        self.port = EstradPort(game, self)
-        self.security_soldier = EstradSecuritySoldier(game, self)
+        self.player = player
+        self.port = EstradPort(game)
+        self.security_soldier = EstradSecuritySoldier(game, self.player)
+        self.colony = EstradColony(game)
 
     def start(self, message):
-        if self.name not in self.game.players[message.chat.id].opened_planets:
-            self.game.players[message.chat.id].opened_planets.append(self.name)
+        if self not in self.game.opened_planets:
+            self.game.opened_planets.append(self)
         self.port.start(message)

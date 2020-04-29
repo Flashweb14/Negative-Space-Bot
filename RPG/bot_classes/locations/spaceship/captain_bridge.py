@@ -1,5 +1,4 @@
-from telebot.types import ReplyKeyboardMarkup
-from RPG.game_states import CAPTAIN_BRIDGE
+from RPG.consts.game_states import CAPTAIN_BRIDGE
 from RPG.bot_classes.locations.base_location import BaseLocation
 
 
@@ -24,11 +23,11 @@ class CaptainBridge(BaseLocation):
         elif message.text == '📦Грузовой отсек':
             self.spaceship.cargo_hold.start(message)
         elif message.text == '👣Выйти из корабля':
-            if not self.game.players[message.chat.id].current_planet:
+            if not self.game.current_planet:
                 self.game.bot.send_message(message.chat.id, 'В открытый космос?0_о Не лучшая идея.',
                                                reply_markup=self.reply_keyboard)
             else:
-                self.game.players[message.chat.id].current_planet.start(message)
+                self.game.current_planet.start(message)
         elif message.text == '📟Главное меню':
             self.game.main_menu.start(message)
         else:

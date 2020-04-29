@@ -1,5 +1,4 @@
-from telebot.types import ReplyKeyboardMarkup
-from RPG.game_states import CABIN
+from RPG.consts.game_states import CABIN
 from RPG.bot_classes.locations.base_location import BaseLocation
 
 
@@ -16,15 +15,15 @@ class Cabin(BaseLocation):
 
     def handle(self, message):
         if message.text == '🚀Капитанский мостик':
-            self.game.spaceship[message.chat.id].captain_bridge.start(message)
+            self.game.spaceship.captain_bridge.start(message)
         elif message.text == '📦Грузовой отсек':
             self.spaceship.cargo_hold.start(message)
         elif message.text == '👣Выйти из корабля':
-            if not self.game.players[message.chat.id].current_planet:
+            if not self.game.current_planet:
                 self.game.bot.send_message(message.chat.id, 'В открытый космос?0_о Не лучшая идея.',
                                                reply_markup=self.reply_keyboard)
             else:
-                self.game.planets[self.game.players[message.chat.id].current_planet][message.chat.id].start(
+                self.game.planets[self.game.current_planet][message.chat.id].start(
                     message)
         elif message.text == '📟Главное меню':
             self.game.main_menu.start(message)

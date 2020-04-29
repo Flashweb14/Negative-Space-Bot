@@ -21,15 +21,15 @@ class Container(BaseHandler):
     def handle(self, message):
         if self.item is not None:
             if message.text == '✔Взять':
-                self.game.players[message.chat.id].add_item(self.item)
+                self.game.player.add_item(self.item)
                 self.item = None
-                self.game.players[message.chat.id].current_location.start(message)
+                self.game.current_location.start(message)
             elif message.text == '✖Оставить':
-                self.game.players[message.chat.id].current_location.start(message)
+                self.game.current_location.start(message)
             else:
                 self.game.bot.send_message(message.chat.id, 'Введено неверное значение')
         else:
             if message.text == '⬅Назад':
-                self.game.players[message.chat.id].current_location.start(message)
+                self.game.current_location.start(message)
             else:
                 self.game.bot.send_message(message.chat.id, 'Введено неверное значение')

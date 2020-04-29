@@ -1,5 +1,5 @@
 from RPG.bot_classes.base_handler import BaseHandler
-from RPG.game_states import CREATE_SPACESHIP
+from RPG.consts.game_states import CREATE_SPACESHIP
 
 
 class SpaceshipCreationMenu(BaseHandler):
@@ -11,13 +11,13 @@ class SpaceshipCreationMenu(BaseHandler):
 
     def handle(self, message):
         name_taken = False
-        for spaceship_id in self.game.spaceship:
-            if message.text == self.game.spaceship[spaceship_id].name:
+        for game_id in self.game.games:
+            if message.text == self.game.games[game_id].spaceship.name:
                 name_taken = True
                 self.game.bot.send_message(message.chat.id, f'Прости, название {message.text} уже занято, '
-                                                                f'попробуй другое')
+                                                            f'попробуй другое')
         if not name_taken:
-            self.game.spaceship[message.chat.id].name = message.text
+            self.game.spaceship.name = message.text
             self.game.bot.send_message(message.chat.id,
-                                           f'Добро пожаловать в игру, {self.game.players[message.chat.id].name}')
+                                       f'Добро пожаловать в игру, {self.game.player.name}')
             self.game.main_menu.start(message)

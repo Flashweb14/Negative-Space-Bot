@@ -12,21 +12,21 @@ class BaseDialog(BaseHandler):
         self.reply_keyboard = ReplyKeyboardMarkup(True, True)
 
     def start(self, message):
-        self.game.players[message.chat.id].state = self.game_state
+        self.game.state = self.game_state
         self.show(message)
 
     def show_input_error(self, message):
         self.game.bot.send_message(message.chat.id, 'Что? Я тебя не понимаю.',
-                                       reply_markup=self.reply_keyboard)
+                                   reply_markup=self.reply_keyboard)
 
     def say(self, message, text):
         self.game.bot.send_message(message.chat.id, f'{self.emoji}*{self.name}*\n'
-                                                        f'{text}',
-                                       parse_mode='Markdown', reply_markup=self.reply_keyboard)
+                                                    f'- {text}',
+                                   parse_mode='Markdown', reply_markup=self.reply_keyboard)
 
     def show(self, message):
         self.game.bot.send_message(message.chat.id, self.show_message,
-                                       parse_mode='Markdown', reply_markup=self.reply_keyboard)
+                                   parse_mode='Markdown', reply_markup=self.reply_keyboard)
 
     def handle(self, message):
         pass

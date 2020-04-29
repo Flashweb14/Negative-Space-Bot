@@ -1,26 +1,19 @@
-from RPG.game_states import ZERO_STATE
-
-
 class Player:
     def __init__(self, name):
-        self.inventory_opened = False
         self.chosen_item = None
-        self.state = ZERO_STATE
-        self.current_location = None
-        self.current_planet = None
-        self.opened_planets = []
+        self.quest_items = []
 
         self.name = name
         self.hp = 20
         self.weapon = None
         self.inventory = [None] * 5
         self.level = 1
-        self.money = 249
+        self.money = 250
 
         self.strength = 3
         self.perception = 4
         self.endurance = 5
-        self.charisma = 3
+        self.charisma = 10
         self.intelligence = 7
         self.agility = 6
         self.luck = 7

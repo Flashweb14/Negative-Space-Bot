@@ -1,29 +1,23 @@
 import telebot
 from RPG.bot_classes.base_handler import BaseHandler
-from RPG.game_states import INVENTORY
+from RPG.consts.game_states import INVENTORY
 
 
 class Inventory(BaseHandler):
     def __init__(self, game):
         super().__init__(game, INVENTORY)
 
-    def start(self, message):
-        self.game.players[message.chat.id].state = self.game_state
-        self.show(message)
-
     def show(self, message):
         inventory_inline_keyboard = telebot.types.InlineKeyboardMarkup()
-        for item in self.game.players[message.chat.id].inventory:
+        for item in self.game.player.inventory:
             if item is None:
                 btn = telebot.types.InlineKeyboardButton(text='<Пустой слот>',
                                                          callback_data=str(
-                                                             self.game.players[
-                                                                 message.chat.id].inventory.index(item)))
+                                                             self.game.player.inventory.index(item)))
             else:
                 btn = telebot.types.InlineKeyboardButton(text=str(item),
                                                          callback_data=str(
-                                                             self.game.players[
-                                                                 message.chat.id].inventory.index(item)))
+                                                             self.game.player.inventory.index(item)))
             inventory_inline_keyboard.add(btn)
         close_btn = telebot.types.InlineKeyboardButton(text='⬅Назад',
                                                        callback_data='back')

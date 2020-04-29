@@ -21,12 +21,12 @@ class Trader(BaseHandler):
 
     def handle(self, message):
         if message.text == '⬇️Купить':
-            self.game.players[message.chat.id].state = self.buy_state
+            self.game.player.state = self.buy_state
             self.show_buy(message)
         elif message.text == '⬆️Продать':
             pass
         elif message.text == '⬅Назад':
-            self.game.players[message.chat.id].current_location.start(message)
+            self.game.current_location.start(message)
         else:
             self.game.bot.send_message(message.chat.id, 'Введено неверное значение')
 

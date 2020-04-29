@@ -1,5 +1,4 @@
-from telebot.types import ReplyKeyboardMarkup
-from RPG.game_states import CARGO_HOLD
+from RPG.consts.game_states import CARGO_HOLD
 from RPG.bot_classes.locations.base_location import BaseLocation
 
 
@@ -17,11 +16,11 @@ class CargoHold(BaseLocation):
         elif message.text == '📟Главное меню':
             self.game.main_menu.start(message)
         elif message.text == '👣Выйти из корабля':
-            if not self.game.players[message.chat.id].current_planet:
+            if not self.game.current_planet:
                 self.game.bot.send_message(message.chat.id, 'В открытый космос?0_о Не лучшая идея.',
                                                reply_markup=self.reply_keyboard)
             else:
-                self.game.planets[self.game.players[message.chat.id].current_planet][message.chat.id].start(
+                self.game.planets[self.game.current_planet][message.chat.id].start(
                     message)
         elif message.text == '🛏Личная каюта':
             self.spaceship.cabin.start(message)

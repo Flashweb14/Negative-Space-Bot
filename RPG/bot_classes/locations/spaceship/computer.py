@@ -11,13 +11,13 @@ class Computer(BaseHandler):
 
     def show(self, message):
         self.game.bot.send_message(message.chat.id, "Ты подходишь к бортовому компьютеру и запускаешь его")
-        # sleep(1)
+        sleep(1)
         self.game.bot.send_message(message.chat.id, "_Spaceship Minisoft console: starting._",
                                    parse_mode='Markdown')
-        # sleep(1)
+        sleep(1)
         self.game.bot.send_message(message.chat.id, "_Loading..._",
                                    parse_mode='Markdown')
-        # sleep(2)
+        sleep(2)
         self.game.bot.send_message(message.chat.id,
                                    f"_Spaceship Minisoft console 3.8.2 _ {str(datetime.today())[:-7]}",
                                    parse_mode='Markdown')

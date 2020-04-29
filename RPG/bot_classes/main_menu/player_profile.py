@@ -10,8 +10,9 @@ class PlayerProfile(BaseHandler):
     def show(self, message):
         player = self.game.player
         player_profile = f'*{player.name}*😎\n' \
-                         f'_Уровень_: {player.level}\n' \
-                         f'_Здоровье_: {player.hp}\n' \
+                         f'🎖_Уровень_: {player.level}\n' \
+                         f'❤️_Здоровье_: {player.hp}\n' \
+                         f'💵_Кредиты_: {player.money}\n' \
                          f'*Характеристики*\n' \
                          f'💪🏻_Сила_: {player.strength}\n' \
                          f'👂🏻_Восприятие_: {player.perception}\n' \

@@ -2,7 +2,7 @@ import telebot
 from RPG.bot_classes.game import Game
 from RPG.consts.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, REGISTRATION, PLAYER_PROFILE, \
     CABIN, CAPTAIN_BRIDGE, CARGO_HOLD, COMPUTER, CREATE_SPACESHIP, ESTRAD_PORT, ESTRAD_SECURITY_SOLDIER, ESTRAD_COLONY, \
-    ESTRAD_TRADER
+    ESTRAD_TRADER, EQUIPMENT
 
 bot = telebot.TeleBot('TOKEN')
 games = {}
@@ -24,6 +24,8 @@ def text_handle(message):
             game.inventory_item_info.handle(message)
         elif game.state == PLAYER_PROFILE:
             game.player_profile.handle(message)
+        elif game.state == EQUIPMENT:
+            game.equipment.handle(message)
         elif game.state == CABIN:
             game.spaceship.cabin.handle(message)
         elif game.state == CAPTAIN_BRIDGE:

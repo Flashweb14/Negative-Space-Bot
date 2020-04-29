@@ -16,7 +16,7 @@ class MainMenu(BaseHandler):
         if message.text == '🎒Инвентарь':
             self.game.inventory.start(message)
         elif message.text == '⛑Снаряжение':
-            pass
+            self.game.equipment.start(message)
         elif message.text == '📒Журнал':
             pass
         elif message.text == '📟Профиль':

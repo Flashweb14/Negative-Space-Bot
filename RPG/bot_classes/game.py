@@ -2,6 +2,7 @@ from RPG.consts.game_states import REGISTRATION
 from RPG.bot_classes.main_menu.inventory import Inventory
 from RPG.bot_classes.main_menu.inventory_item_info import InventoryItemInfo
 from RPG.bot_classes.main_menu.main_menu import MainMenu
+from RPG.bot_classes.main_menu.equipment import Equipment
 from RPG.bot_classes.start_game_menus.create_player import PlayerCreationMenu
 from RPG.bot_classes.start_game_menus.create_spaceship import SpaceshipCreationMenu
 from RPG.bot_classes.main_menu.player_profile import PlayerProfile
@@ -27,10 +28,11 @@ class Game:
         self.inventory = Inventory(self)
         self.inventory_item_info = InventoryItemInfo(self)
         self.player_profile = PlayerProfile(self)
+        self.equipment = Equipment(self)
 
         self.spaceship = Spaceship(self)  # Корабль
 
         self.estrad = Estrad(self, self.player)  # Планеты
 
-        self.current_location = self.estrad.colony
+        self.current_location = self.spaceship.cabin
         self.planets = [self.estrad]

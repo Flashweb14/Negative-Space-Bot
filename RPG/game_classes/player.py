@@ -8,10 +8,15 @@ class Player:
 
         self.name = name
         self.hp = 60
-        self.weapon = None
-        self.inventory = [None] * 5
         self.level = 1
         self.money = 250
+
+        self.inventory = [None] * 5
+        self.weapon = None
+        self.head_armor = None
+        self.chest_armor = None
+        self.feet_armor = None
+        self.chip = None
 
         self.strength = 3
         self.perception = 4
@@ -50,3 +55,24 @@ class Player:
                 if self.inventory[i - 1] is None:
                     self.inventory[i - 1] = self.inventory[i]
                     self.inventory[i] = None
+
+    def get_equipment(self):
+        weapon, head_armor, chest_armor, feet_armor, chip = self.weapon, self.head_armor, \
+                                                            self.chest_armor, self.feet_armor, self.chip
+        if self.weapon is None:
+            weapon = '<Пусто>'
+        if self.head_armor is None:
+            head_armor = '<Пусто>'
+        if self.chest_armor is None:
+            chest_armor = '<Пусто>'
+        if self.feet_armor is None:
+            feet_armor = '<Пусто>'
+        if self.chip is None:
+            chip = '<Пусто>'
+        equipment = f'😎*{self.name}*\n' \
+                    f'⛑_Голова_: {head_armor}\n' \
+                    f'🧥_Тело_: {chest_armor}\n' \
+                    f'🥾_Ноги_: {feet_armor}\n' \
+                    f'💽_Чип_: {chip}\n' \
+                    f'🔫_Оружие_: {weapon}'
+        return equipment

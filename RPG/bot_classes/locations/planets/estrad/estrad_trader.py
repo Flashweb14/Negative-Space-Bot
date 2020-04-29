@@ -27,12 +27,13 @@ class EstradTrader(BaseDialog):
                 if not self.kit_given:
                     self.game.player.add_item(LIGHT_LASER_RIFFLE)
                     self.game.player.add_item(LITTLE_MED_PACK)
+                    self.kit_given = True
                     self.say(message, 'Вот, пожалуйста. Добро пожаловать в ряды колонизаторов планеты Эстрад!')
                 else:
                     self.say(message, "По одному комплекту на руки, ты свой уже получил.")
             else:
                 self.say(message, 'Прости, без пропуска солдата федерации я не могу выдать тебе боевой комплект.')
-        elif message.text == 'Мне уже пора':
+        elif message.text == 'Мне пора':
             self.say(message, 'Заходи ещё.')
             self.game.estrad.colony.start(message)
         else:

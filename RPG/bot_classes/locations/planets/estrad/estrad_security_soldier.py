@@ -15,7 +15,7 @@ class EstradSecuritySoldier(BaseDialog):
         self.reply_keyboard.row('[💵250] Может можно как-то договориться?')
         if FEDERATION_PASS in self.player.quest_items:
             self.reply_keyboard.row('Показать пропуск')
-        self.reply_keyboard.row('Мне уже пора')
+        self.reply_keyboard.row('Мне пора')
 
     def handle(self, message):
         if (message.text ==

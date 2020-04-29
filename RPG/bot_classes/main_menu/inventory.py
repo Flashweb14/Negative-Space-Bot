@@ -12,8 +12,7 @@ class Inventory(BaseHandler):
         for item in self.game.player.inventory:
             if item is None:
                 btn = telebot.types.InlineKeyboardButton(text='<Пустой слот>',
-                                                         callback_data=str(
-                                                             self.game.player.inventory.index(item)))
+                                                         callback_data='empty')
             else:
                 btn = telebot.types.InlineKeyboardButton(text=str(item),
                                                          callback_data=str(
@@ -30,4 +29,5 @@ class Inventory(BaseHandler):
             self.game.bot.delete_message(call.message.chat.id, call.message.message_id)
             self.game.main_menu.start(call.message)
         else:
-            self.game.inventory_item_info.start(call)
+            if call.data != 'empty':
+                self.game.inventory_item_info.start(call)

@@ -4,5 +4,11 @@ class BaseObject:
         self.price = price
         self.type = type
 
+    def use(self, player):
+        pass
+
+    def get_info(self):
+        pass
+
     def __str__(self):
         return self.name

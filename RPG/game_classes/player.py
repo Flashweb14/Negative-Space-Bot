@@ -1,10 +1,13 @@
+from RPG.consts.quest_items import FEDERATION_PASS
+
+
 class Player:
     def __init__(self, name):
         self.chosen_item = None
-        self.quest_items = []
+        self.quest_items = [FEDERATION_PASS]
 
         self.name = name
-        self.hp = 20
+        self.hp = 60
         self.weapon = None
         self.inventory = [None] * 5
         self.level = 1
@@ -36,15 +39,6 @@ class Player:
                 return True, 'Успешно куплено:'
         else:
             return False, 'недостаточно денег'
-
-    def equip_weapon(self, weapon):
-        if self.weapon is None:
-            self.weapon = weapon
-            self.inventory[self.inventory.index(weapon)] = None
-            self.sort_inventory()
-        else:
-            self.inventory[self.inventory.index(weapon)] = self.weapon
-            self.weapon = weapon
 
     def drop_item(self, item):
         self.inventory[self.inventory.index(item)] = None

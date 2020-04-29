@@ -23,8 +23,7 @@ class Cabin(BaseLocation):
                 self.game.bot.send_message(message.chat.id, 'В открытый космос?0_о Не лучшая идея.',
                                                reply_markup=self.reply_keyboard)
             else:
-                self.game.planets[self.game.current_planet][message.chat.id].start(
-                    message)
+                self.game.current_planet.start(message)
         elif message.text == '📟Главное меню':
             self.game.main_menu.start(message)
         else:

@@ -34,5 +34,5 @@ class Game:
 
         self.estrad = Estrad(self, self.player)  # Планеты
 
-        self.current_location = self.spaceship.cabin
+        self.current_location = self.estrad.colony
         self.planets = [self.estrad]

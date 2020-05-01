@@ -11,6 +11,7 @@ class MedPack(BaseObject):
         if player.hp > 100:
             player.hp = 100
         player.inventory[player.inventory.index(self)] = None
+        player.inventory.sort()
 
     def get_info(self):
         return f'*➕{self.name}*\n' \

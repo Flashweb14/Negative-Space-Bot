@@ -14,7 +14,7 @@ class EstradSecuritySoldier(BaseDialog):
             'вашему начальству.')
         self.reply_keyboard.row('[💵250] Может можно как-то договориться?')
         if FEDERATION_PASS in self.player.quest_items:
-            self.reply_keyboard.row('Показать пропуск')
+            self.reply_keyboard.row('Вот мой пропуск')
         self.reply_keyboard.row('Мне пора')
 
     def handle(self, message):
@@ -34,8 +34,14 @@ class EstradSecuritySoldier(BaseDialog):
                 self.game.estrad.colony.start(message)
             else:
                 self.say(message, 'У тебя и денег то таких нет.')
-        elif message.text == 'Мне уже пора':
+        elif message.text == 'Вот мой пропуск':
+            if FEDERATION_PASS in self.game.player.quest_items:
+                self.say(message, 'Хорошо, проходи')
+                self.game.estrad.colony.start(message)
+            else:
+                self.say(message, 'Ага, у тебя его нет, умник.')
+        elif message.text == 'Мне пора':
             self.say(message, 'До встречи.')
-            self.estrad.port.start(message)
+            self.game.estrad.start(message)
         else:
             self.show_input_error(message)

@@ -19,10 +19,12 @@ class BaseDialog(BaseHandler):
         self.game.bot.send_message(message.chat.id, 'Что? Я тебя не понимаю.',
                                    reply_markup=self.reply_keyboard)
 
-    def say(self, message, text):
+    def say(self, message, text, reply_markup=None):
+        if reply_markup is None:
+            reply_markup = self.reply_keyboard
         self.game.bot.send_message(message.chat.id, f'{self.emoji}*{self.name}*\n'
                                                     f'- {text}',
-                                   parse_mode='Markdown', reply_markup=self.reply_keyboard)
+                                   parse_mode='Markdown', reply_markup=reply_markup)
 
     def show(self, message):
         self.game.bot.send_message(message.chat.id, self.show_message,

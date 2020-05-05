@@ -2,9 +2,9 @@ import telebot
 from RPG.bot_classes.game import Game
 from RPG.consts.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, REGISTRATION, PLAYER_PROFILE, \
     CABIN, CAPTAIN_BRIDGE, CARGO_HOLD, COMPUTER, CREATE_SPACESHIP, ESTRAD_PORT, ESTRAD_SECURITY_SOLDIER, ESTRAD_COLONY, \
-    ESTRAD_TRADER, EQUIPMENT, ESTRAD_TRADER_TRADE_MENU, ESTRAD_TRADER_BUY, ESTRAD_TRADER_SELL
+    ESTRAD_TRADER, EQUIPMENT, ESTRAD_TRADER_TRADE_MENU, ESTRAD_TRADER_BUY, ESTRAD_TRADER_SELL, ESTRAD_FOREST_ENTRY
 
-bot = telebot.TeleBot('TOKEN')
+bot = telebot.TeleBot('1246120529:AAHqDXwlbfz_XjRjrNsunHU54etEOCHL1tM')
 games = {}
 
 
@@ -48,6 +48,8 @@ def text_handle(message):
             bot.send_message(message.chat.id, 'Не-а, здесь так нельзя.')
         elif game.state == ESTRAD_TRADER_SELL:
             bot.send_message(message.chat.id, 'Не-а, здесь так нельзя.')
+        elif game.state == ESTRAD_FOREST_ENTRY:
+            game.estrad.forest.entry.handle(message)
     elif message.text == '/start':
         games[message.chat.id] = Game(bot, games)
         games[message.chat.id].player_creation_menu.start(message)

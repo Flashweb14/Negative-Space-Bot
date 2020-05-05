@@ -40,7 +40,7 @@ class Player:
             if not self.add_item(item):
                 return False, 'инвентарь полон'
             else:
-                self.money -= int(item.price / trader_factor)
+                self.money -= int(item.price * trader_factor)
                 return True, 'Успешно куплено:'
         else:
             return False, 'недостаточно денег'

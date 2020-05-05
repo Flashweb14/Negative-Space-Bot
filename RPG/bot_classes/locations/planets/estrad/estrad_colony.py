@@ -25,7 +25,7 @@ class EstradColony(BaseLocation):
         elif message.text == '🏕Штаб начальства':
             pass
         elif message.text == '🌲Лес':
-            pass
+            self.game.estrad.forest.entry.start(message)
         elif message.text == '🚀Назад на корабль':
             self.game.spaceship.cabin.start(message)
         elif message.text == '📟Главное меню':

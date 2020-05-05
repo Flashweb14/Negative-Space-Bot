@@ -1,0 +1,1 @@
+web: python RPG/__main__.py

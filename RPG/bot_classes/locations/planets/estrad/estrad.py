@@ -3,6 +3,7 @@ from RPG.bot_classes.locations.planets.estrad.estrad_port import EstradPort
 from RPG.bot_classes.locations.planets.estrad.estrad_security_soldier import EstradSecuritySoldier
 from RPG.bot_classes.locations.planets.estrad.estrad_colony import EstradColony
 from RPG.bot_classes.locations.planets.estrad.estrad_trader import EstradTrader
+from RPG.bot_classes.locations.planets.estrad.forest.estrad_forest import EstradForest
 
 
 class Estrad(BasePlanet):
@@ -18,6 +19,7 @@ class Estrad(BasePlanet):
         self.security_soldier = EstradSecuritySoldier(game, self.player)
         self.colony = EstradColony(game)
         self.trader = EstradTrader(game)
+        self.forest = EstradForest(game)
 
     def start(self, message):
         if self not in self.game.opened_planets:

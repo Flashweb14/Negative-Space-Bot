@@ -33,7 +33,7 @@ class TradeMenu(BaseHandler):
         self.game.state = self.buy_state
         trader_inline_keyboard = InlineKeyboardMarkup()
         for product in self.stock_products:
-            btn = InlineKeyboardButton(text=f'{product} 💵{int(product.price / self.factor)}',
+            btn = InlineKeyboardButton(text=f'{product} 💵{int(product.price * self.factor)}',
                                        callback_data=str(self.stock_products.index(product)))
             trader_inline_keyboard.add(btn)
         close_btn = InlineKeyboardButton(text='⬅Назад',

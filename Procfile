@@ -1,1 +1,1 @@
-web: python RPG/__main__.py
+worker: python RPG/__main__.py

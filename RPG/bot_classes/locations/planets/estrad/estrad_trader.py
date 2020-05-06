@@ -2,7 +2,7 @@ from RPG.consts.game_states import ESTRAD_TRADER, ESTRAD_TRADER_TRADE_MENU, ESTR
 from RPG.bot_classes.base_dialog import BaseDialog
 from RPG.consts.quest_items import FEDERATION_PASS
 from RPG.consts.weapons import LIGHT_LASER_RIFFLE, OLD_LASER_PISTOL
-from RPG.consts.items import LITTLE_MED_PACK
+from RPG.consts.items import LITTLE_MED_PACK, LIGHT_SOLDIER_ARMOR_SET
 from RPG.bot_classes.trader import TradeMenu
 
 
@@ -32,6 +32,7 @@ class EstradTrader(BaseDialog):
                 if not self.kit_given:
                     self.game.player.add_item(LIGHT_LASER_RIFFLE)
                     self.game.player.add_item(LITTLE_MED_PACK)
+                    self.game.player.add_item(LIGHT_SOLDIER_ARMOR_SET)
                     self.kit_given = True
                     self.say(message, 'Вот, пожалуйста. Добро пожаловать в ряды колонизаторов планеты Эстрад!')
                 else:

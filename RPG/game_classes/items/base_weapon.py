@@ -3,7 +3,10 @@ from RPG.game_classes.items.base_object import BaseObject
 
 class BaseWeapon(BaseObject):
     def __init__(self, name, damage, ammo_type, price):
-        super().__init__(name, 'weapon', price)
+        info = f'🔫*{name}* \n' \
+               f'_🗡Урон_: {damage} \n' \
+               f'_🔋Тип боеприпасов_: {ammo_type}'
+        super().__init__(name, info, price)
         self.damage = damage
         self.ammo_type = ammo_type
 
@@ -15,13 +18,6 @@ class BaseWeapon(BaseObject):
         else:
             player.inventory[player.inventory.index(self)] = player.weapon
             player.weapon = self
-        player.inventory.sort()
-
-    def get_info(self):
-        info = f'*{self.name}* \n' \
-               f'_🗡Урон_: {self.damage} \n' \
-               f'_🔋Тип боеприпасов_: {self.ammo_type}'
-        return info
 
     def __str__(self):
         return f'🔫{self.name} 🗡{self.damage}'

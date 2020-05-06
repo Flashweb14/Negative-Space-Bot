@@ -8,23 +8,34 @@ class Player:
 
         self.name = name
         self.hp = 60
+        self.armor = 0
         self.level = 1
         self.money = 250
 
         self.inventory = [None] * 5
         self.weapon = None
-        self.head_armor = None
-        self.chest_armor = None
-        self.feet_armor = None
-        self.chip = None
+        self.armor_set = None
 
-        self.strength = 3
-        self.perception = 4
-        self.endurance = 5
-        self.charisma = 10
-        self.intelligence = 7
-        self.agility = 6
-        self.luck = 7
+        self.endurance = 1
+        self.gun_skills = 1
+        self.perception = 1
+        self.charisma = 1
+        self.agility = 1
+        self.luck = 1
+
+    def get_stats(self):
+        stats = f'*{self.name}*😎\n' \
+                f'🎖_Уровень_: {self.level}\n' \
+                f'❤️_Здоровье_: {self.hp}\n' \
+                f'💵_Кредиты_: {self.money}\n' \
+                f'*Характеристики*\n' \
+                f'🔫_Меткость_: {self.gun_skills}\n' \
+                f'👂🏻_Восприятие_: {self.perception}\n' \
+                f'🏃🏻‍♂️_Выносливость_: {self.endurance}\n' \
+                f'🗣_Харизма_: {self.charisma}\n' \
+                f'🤸🏻‍♂️_Ловкость_: {self.agility}\n' \
+                f'🍀_Удача_: {self.luck}'
+        return stats
 
     def add_item(self, item):
         added_item = False
@@ -61,22 +72,12 @@ class Player:
                     self.inventory[i] = None
 
     def get_equipment(self):
-        weapon, head_armor, chest_armor, feet_armor, chip = self.weapon, self.head_armor, \
-                                                            self.chest_armor, self.feet_armor, self.chip
+        weapon, armor_set = self.weapon, self.armor_set
         if self.weapon is None:
             weapon = '<Пусто>'
-        if self.head_armor is None:
-            head_armor = '<Пусто>'
-        if self.chest_armor is None:
-            chest_armor = '<Пусто>'
-        if self.feet_armor is None:
-            feet_armor = '<Пусто>'
-        if self.chip is None:
-            chip = '<Пусто>'
+        if self.armor_set is None:
+            armor_set = '<Пусто>'
         equipment = f'😎*{self.name}*\n' \
-                    f'⛑_Голова_: {head_armor}\n' \
-                    f'🧥_Тело_: {chest_armor}\n' \
-                    f'🥾_Ноги_: {feet_armor}\n' \
-                    f'💽_Чип_: {chip}\n' \
-                    f'🔫_Оружие_: {weapon}'
+                    f'🧥_Комплект брони_: {str(armor_set)[1:]}\n' \
+                    f'🔫_Оружие_: {str(weapon)[1:]}'
         return equipment

@@ -3,7 +3,9 @@ from RPG.game_classes.items.base_object import BaseObject
 
 class MedPack(BaseObject):
     def __init__(self, name, hp_increase):
-        super().__init__(name, 'item', 100)
+        info = f'*➕{name}*\n' \
+               f'❤_️Восстанавливает {hp_increase} едениц здоровья._'
+        super().__init__(name, info, 100)
         self.hp_increase = hp_increase
 
     def use(self, player):
@@ -12,10 +14,6 @@ class MedPack(BaseObject):
             player.hp = 100
         player.inventory[player.inventory.index(self)] = None
         player.inventory.sort()
-
-    def get_info(self):
-        return f'*➕{self.name}*\n' \
-               f'❤_️Восстанавливает {self.hp_increase} едениц здоровья._'
 
     def __str__(self):
         return f'➕{self.name}'

@@ -8,20 +8,7 @@ class PlayerProfile(BaseHandler):
         self.reply_keyboard.row('⬅Назад')
 
     def show(self, message):
-        player = self.game.player
-        player_profile = f'*{player.name}*😎\n' \
-                         f'🎖_Уровень_: {player.level}\n' \
-                         f'❤️_Здоровье_: {player.hp}\n' \
-                         f'💵_Кредиты_: {player.money}\n' \
-                         f'*Характеристики*\n' \
-                         f'💪🏻_Сила_: {player.strength}\n' \
-                         f'👂🏻_Восприятие_: {player.perception}\n' \
-                         f'🏃🏻‍♂️_Выносливость_: {player.endurance}\n' \
-                         f'🗣_Харизма_: {player.charisma}\n' \
-                         f'🧠_Интеллект_: {player.intelligence}\n' \
-                         f'🤸🏻‍♂️_Ловкость_: {player.agility}\n' \
-                         f'🍀_Удача_: {player.luck}'
-        self.game.bot.send_message(message.chat.id, player_profile, parse_mode='Markdown',
+        self.game.bot.send_message(message.chat.id, self.game.player.get_stats(), parse_mode='Markdown',
                                    reply_markup=self.reply_keyboard)
 
     def handle(self, message):

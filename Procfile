@@ -1,1 +1,1 @@
-bot: python -m RPG
+bot: python3 -m RPG

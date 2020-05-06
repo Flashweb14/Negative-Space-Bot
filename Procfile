@@ -1,1 +1,1 @@
-bot: python RPG/__main__.py
+bot: python -m RPG

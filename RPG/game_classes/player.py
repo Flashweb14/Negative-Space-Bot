@@ -24,17 +24,17 @@ class Player:
         self.luck = 1
 
     def get_stats(self):
-        stats = f'*{self.name}*😎\n' \
-                f'🎖_Уровень_: {self.level}\n' \
-                f'❤️_Здоровье_: {self.hp}\n' \
-                f'💵_Кредиты_: {self.money}\n' \
+        stats = f'*{self.name}* 😎\n' \
+                f'🎖 _Уровень_: {self.level}\n' \
+                f'❤ _Здоровье_: {self.hp}\n' \
+                f'💵 _Кредиты_: {self.money}\n' \
                 f'*Характеристики*\n' \
-                f'🔫_Меткость_: {self.gun_skills}\n' \
-                f'👂🏻_Восприятие_: {self.perception}\n' \
-                f'🏃🏻‍♂️_Выносливость_: {self.endurance}\n' \
-                f'🗣_Харизма_: {self.charisma}\n' \
-                f'🤸🏻‍♂️_Ловкость_: {self.agility}\n' \
-                f'🍀_Удача_: {self.luck}'
+                f'🔫 _Меткость_: {self.gun_skills}\n' \
+                f'👂🏻 _Восприятие_: {self.perception}\n' \
+                f'🏃🏻‍♂ _Выносливость_: {self.endurance}\n' \
+                f'🗣 _Харизма_: {self.charisma}\n' \
+                f'🏃🏻‍♂ _Ловкость_: {self.agility}\n' \
+                f'🍀 _Удача_: {self.luck}'
         return stats
 
     def add_item(self, item):

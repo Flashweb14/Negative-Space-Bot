@@ -8,5 +8,6 @@ class FightSystem(BaseHandler):
         self.enemy = None
 
     def start_fight(self, message, enemy):
-        self.enemy.show_fight_message(message)
-        self.game.bot.send_message(message.chat.id, f'⚔️Ты вступил в бой с {enemy.name}⚔️')
+        self.enemy = enemy
+        self.game.bot.send_message(message.chat.id, self.enemy.fight_message)
+        self.game.bot.send_message(message.chat.id, f'⚔️Ты вступил в бой с *{enemy.name}*⚔️', parse_mode='Markdown')

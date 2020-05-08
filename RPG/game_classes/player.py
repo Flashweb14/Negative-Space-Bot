@@ -17,7 +17,7 @@ class Player:
         self.armor_set = None
 
         self.endurance = 1
-        self.gun_skills = 1
+        self.accuracy = 1
         self.perception = 1
         self.charisma = 1
         self.agility = 1
@@ -29,7 +29,7 @@ class Player:
                 f'❤ _Здоровье_: {self.hp}\n' \
                 f'💵 _Кредиты_: {self.money}\n' \
                 f'*Характеристики*\n' \
-                f'🔫 _Меткость_: {self.gun_skills}\n' \
+                f'🔫 _Меткость_: {self.accuracy}\n' \
                 f'👂🏻 _Восприятие_: {self.perception}\n' \
                 f'🏃🏻‍♂ _Выносливость_: {self.endurance}\n' \
                 f'🗣 _Харизма_: {self.charisma}\n' \

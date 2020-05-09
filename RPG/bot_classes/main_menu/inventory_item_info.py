@@ -41,7 +41,7 @@ class InventoryItemInfo(BaseHandler):
             self.game.inventory.start(message)
         elif message.text == '🔄Перезарядить':
             if isinstance(self.item, BaseWeapon):
-                self.game.bot.send_message(message.chat.id, self.item.reload())
+                self.game.bot.send_message(message.chat.id, self.item.reload(self.game.player))
             else:
                 self.show_input_error(message)
             self.game.inventory.start(message)

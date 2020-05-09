@@ -1,6 +1,6 @@
 from RPG.bot_classes.base_handler import BaseHandler
 from RPG.consts.game_states import CREATE_SPACESHIP
-from RPG.utilities import check_name_valid, check_name_taken
+from RPG.utilities import check_name_valid, check_spaceship_name_taken
 
 
 class SpaceshipCreationMenu(BaseHandler):
@@ -15,7 +15,7 @@ class SpaceshipCreationMenu(BaseHandler):
             self.game.bot.send_message(message.chat.id,
                                        'Название корабля должно быть длиннее 2 символов и содержать в себе только '
                                        'буквы любого алфавита и цифры. Попробуй другое.')
-        elif check_name_taken(self.game, self.game.games, message.text):
+        elif check_spaceship_name_taken(self.game.games, message.text):
             self.game.bot.send_message(message.chat.id,
                                        f'К сожалению, название {message.text} уже занято. Попробуй другое.')
         else:

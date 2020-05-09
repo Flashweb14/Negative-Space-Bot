@@ -10,6 +10,8 @@ from RPG.bot_classes.locations.spaceship.spaceship import Spaceship
 from RPG.bot_classes.locations.planets.estrad.estrad import Estrad
 from RPG.bot_classes.fight_system import FightSystem
 from RPG.game_classes.player import Player
+from RPG.bot_classes.main_menu.equipment_weapon_info import EquipmentWeaponInfo
+from RPG.bot_classes.main_menu.equipment_armor_info import EquipmentArmorInfo
 
 
 class Game:
@@ -31,10 +33,12 @@ class Game:
         self.inventory_item_info = InventoryItemInfo(self)
         self.player_profile = PlayerProfile(self)
         self.equipment = Equipment(self)
+        self.equipment_weapon_info = EquipmentWeaponInfo(self)
+        self.equipment_armor_info = EquipmentArmorInfo(self)
 
         self.spaceship = Spaceship(self)  # Корабль
 
         self.estrad = Estrad(self, self.player)  # Планеты
 
-        self.current_location = self.spaceship.cabin
+        self.current_location = self.estrad.colony
         self.planets = [self.estrad]

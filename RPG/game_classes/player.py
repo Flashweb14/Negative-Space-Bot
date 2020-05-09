@@ -3,25 +3,25 @@ from RPG.consts.quest_items import FEDERATION_PASS
 
 class Player:
     def __init__(self, name):
-        self.chosen_item = None
-        self.quest_items = [FEDERATION_PASS]
-
-        self.name = name
+        self.name = name  # Основные характеристики игрока
         self.hp = 60
         self.armor = 0
         self.level = 1
         self.money = 250
 
-        self.inventory = [None] * 5
-        self.weapon = None
-        self.armor_set = None
-
-        self.endurance = 1
+        self.endurance = 1  # Индивидуальные параметры игрока
         self.accuracy = 1
         self.perception = 1
         self.charisma = 1
         self.agility = 1
         self.luck = 1
+
+        self.quest_items = [FEDERATION_PASS]  # Список полученных квестовых предметов
+
+        self.inventory = [None] * 5  # Инвентарь и снаряжение
+        self.weapon = None
+        self.armor_set = None
+        self.laser_ammo = 0
 
     def get_stats(self):
         stats = f'*{self.name}* 😎\n' \
@@ -74,10 +74,11 @@ class Player:
     def get_equipment(self):
         weapon, armor_set = self.weapon, self.armor_set
         if self.weapon is None:
-            weapon = '<Пусто>'
+            weapon = ' <Пусто>'
         if self.armor_set is None:
-            armor_set = '<Пусто>'
-        equipment = f'😎*{self.name}*\n' \
-                    f'🧥_Комплект брони_: {str(armor_set)[1:]}\n' \
-                    f'🔫_Оружие_: {str(weapon)[1:]}'
+            armor_set = ' <Пусто>'
+        equipment = f'😎 *{self.name}*\n' \
+                    f'🧥 _Комплект брони_: {str(armor_set)[1:]}\n' \
+                    f'🔫 _Оружие_: {str(weapon)[1:]}\n' \
+                    f'🔋 _Лазерные батареи_: {self.laser_ammo}'
         return equipment

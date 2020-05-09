@@ -33,6 +33,7 @@ class EstradTrader(BaseDialog):
                     self.game.player.add_item(LIGHT_LASER_RIFFLE)
                     self.game.player.add_item(LITTLE_MED_PACK)
                     self.game.player.add_item(LIGHT_SOLDIER_ARMOR_SET)
+                    self.game.player.laser_ammo += 20
                     self.kit_given = True
                     self.say(message, 'Вот, пожалуйста. Добро пожаловать в ряды колонизаторов планеты Эстрад!')
                 else:

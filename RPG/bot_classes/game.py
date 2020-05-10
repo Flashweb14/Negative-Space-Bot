@@ -8,7 +8,7 @@ from RPG.bot_classes.start_game_menus.create_spaceship import SpaceshipCreationM
 from RPG.bot_classes.main_menu.player_profile import PlayerProfile
 from RPG.bot_classes.locations.spaceship.spaceship import Spaceship
 from RPG.bot_classes.locations.planets.estrad.estrad import Estrad
-from RPG.bot_classes.fight_system import FightSystem
+from RPG.bot_classes.fight_system.fight_system import FightSystem
 from RPG.game_classes.player import Player
 from RPG.bot_classes.main_menu.equipment_weapon_info import EquipmentWeaponInfo
 from RPG.bot_classes.main_menu.equipment_armor_info import EquipmentArmorInfo

@@ -27,7 +27,10 @@ class Inventory(BaseHandler):
         if call.data == 'back':
             self.game.bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
             self.game.bot.delete_message(call.message.chat.id, call.message.message_id)
-            self.game.main_menu.start(call.message)
+            if self.game.player.in_fight:
+                self.game.fight_system.player_turn.start(call.message)
+            else:
+                self.game.main_menu.start(call.message)
         else:
             if call.data != 'empty':
                 self.game.inventory_item_info.start(call)

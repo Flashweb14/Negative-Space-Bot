@@ -1,6 +1,5 @@
 from RPG.bot_classes.locations.base_location import BaseLocation
 from RPG.consts.game_states import ESTRAD_FOREST_ENTRY
-from RPG.consts.enemies import ESTRAD_NATIVE
 
 
 class ForestEntry(BaseLocation):
@@ -20,7 +19,7 @@ class ForestEntry(BaseLocation):
                                        'Ты выбираешь левый путь. Пока ты углубляешься всё дальше в пучины леса, '
                                        'ты всё чаще начинаешь замечать, как заросли, окружающие тебя, переодически '
                                        'странно двигаются...')
-            self.game.fight_system.start_fight(message, ESTRAD_NATIVE)
+            self.game.estrad.forest.field.start(message)
         elif message.text == '🏘Назад в колонию':
             self.game.estrad.colony.start(message)
         elif message.text == '📟Главное меню':

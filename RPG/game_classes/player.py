@@ -1,4 +1,6 @@
+from random import randint
 from RPG.consts.quest_items import FEDERATION_PASS
+from RPG.consts.weapons import LIGHT_LASER_RIFFLE
 
 
 class Player:
@@ -10,18 +12,20 @@ class Player:
         self.money = 250
 
         self.endurance = 1  # Индивидуальные параметры игрока
-        self.accuracy = 1
+        self.accuracy = 10
         self.perception = 1
         self.charisma = 1
         self.agility = 1
-        self.luck = 1
+        self.luck = 4
 
         self.quest_items = [FEDERATION_PASS]  # Список полученных квестовых предметов
 
         self.inventory = [None] * 5  # Инвентарь и снаряжение
         self.weapon = None
         self.armor_set = None
-        self.laser_ammo = 0
+        self.laser_ammo = 100
+
+        self.in_fight = False
 
     def get_stats(self):
         stats = f'*{self.name}* 😎\n' \
@@ -82,3 +86,20 @@ class Player:
                     f'🔫 _Оружие_: {str(weapon)[1:]}\n' \
                     f'🔋 _Лазерные батареи_: {self.laser_ammo}'
         return equipment
+
+    def attack(self, enemy, shot_accuracy, shot_damage_coef):
+        if randint(0, 19) in range(self.accuracy + shot_accuracy):
+            if randint(0, 9) in range(self.luck):
+                enemy.hp -= self.weapon.damage * 3
+                return f'Критическое попадание, ты наносишь противнику ' \
+                       f'урон в {self.weapon.damage * 3 * shot_damage_coef} hp'
+            else:
+                enemy.hp -= self.weapon.damage * shot_damage_coef
+                return f'Попадание! Ты нанасошь противнику урон в {self.weapon.damage * shot_damage_coef} hp'
+
+        else:
+            if randint(0, 9) not in range(self.luck):
+                self.hp -= self.weapon.damage
+                return f'Критический промах! Ты попадаешь ' \
+                       f'себе в ногу и наносишь урон в размере {self.weapon.damage * shot_damage_coef} hp'
+            return 'Промах!'

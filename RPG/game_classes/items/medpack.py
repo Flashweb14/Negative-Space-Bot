@@ -13,7 +13,7 @@ class MedPack(BaseObject):
         if player.hp > 100:
             player.hp = 100
         player.inventory[player.inventory.index(self)] = None
-        player.inventory.sort()
+        player.sort_inventory()
 
     def __str__(self):
         return f'➕{self.name}'

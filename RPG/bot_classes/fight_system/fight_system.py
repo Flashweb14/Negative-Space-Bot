@@ -13,8 +13,8 @@ class FightSystem(BaseHandler):
         super().__init__(game, FIGHT_SYSTEM)
         self.enemy = None
         self.player_turn_first = None
-        self.max_action_points = 4
-        self.action_points = 4
+        self.max_action_points = 1
+        self.action_points = 1
         self.player_turn = FightSystemPlayerTurn(game)
         self.weapon_use_menu = FightSystemWeaponUseMenu(game)
         self.aim_shot_menu = AimShotMenu(game)
@@ -78,7 +78,13 @@ class FightSystem(BaseHandler):
 
     def check_player_dead(self, message):
         if self.game.player.hp <= 0:
-            self.game.bot.send_message(message.chat.id, 'Ууууупс... видимо ты умер.')
+            self.game.bot.send_message(message.chat.id, 'Ууууупс... видимо ты умер. Попращайся со своим инвентарём и '
+                                                        'вернись на корабль.')
+            self.game.player.inventory = [None] * 5
+            self.game.player.weapon = None
+            self.game.player.armor_set = None
+            self.game.player.in_fight = False
+            self.game.spaceship.cabin.start(message)
         else:
             self.game.bot.send_message(message.chat.id, f'У тебя осталось {self.game.player.hp} hp',
                                        reply_markup=self.reply_keyboard)

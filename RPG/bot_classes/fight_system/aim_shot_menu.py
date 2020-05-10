@@ -20,7 +20,7 @@ class AimShotMenu(BaseHandler):
         if message.text == '😡 Голова - 5 ОД':
             if self.game.fight_system.action_points >= 5:
                 if self.game.player.laser_ammo >= 1:
-                    self.game.player.attack(self.game.fight_system.enemy, 3, 9)
+                    self.game.fight_system.player_attack(message, 1, 5, 3, 9, self.reply_keyboard)
                 else:
                     self.game.fight_system.show_ammo_error(message)
             else:
@@ -36,7 +36,7 @@ class AimShotMenu(BaseHandler):
         elif message.text == '🦵🏻 Конечности - 4 ОД':
             if self.game.fight_system.action_points >= 4:
                 if self.game.player.laser_ammo >= 1:
-                    self.game.fight_system.player_attack(message, 1, 3, 5, 5, self.reply_keyboard)
+                    self.game.fight_system.player_attack(message, 1, 4, 5, 5, self.reply_keyboard)
                 else:
                     self.game.fight_system.show_ammo_error(message)
             else:

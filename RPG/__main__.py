@@ -1,3 +1,4 @@
+import os
 import telebot
 from RPG.bot_classes.game import Game
 from RPG.consts.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, REGISTRATION, PLAYER_PROFILE, \
@@ -5,8 +6,11 @@ from RPG.consts.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, REGISTR
     ESTRAD_TRADER, EQUIPMENT, ESTRAD_TRADER_TRADE_MENU, ESTRAD_TRADER_BUY, ESTRAD_TRADER_SELL, ESTRAD_FOREST_ENTRY, \
     EQUIPMENT_WEAPON_INFO, EQUIPMENT_ARMOR_INFO, FIGHT_SYSTEM_PLAYER_TURN, FIGHT_SYSTEM_WEAPON_USE, ESTRAD_FOREST_FIELD, \
     FIGHT_SYSTEM_AIM_SHOT_MENU
+from boto.s3.connection import S3Connection
 
-bot = telebot.TeleBot('TOKEN')
+token = S3Connection(os.environ['TOKEN'])
+
+bot = telebot.TeleBot(token)
 games = {}
 
 

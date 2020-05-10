@@ -8,7 +8,9 @@ from RPG.consts.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, REGISTR
     FIGHT_SYSTEM_AIM_SHOT_MENU
 from boto.s3.connection import S3Connection
 
-token = S3Connection(os.environ['TOKEN'])
+s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
+
+token = os.environ.get('TOKEN')
 
 bot = telebot.TeleBot(token)
 games = {}

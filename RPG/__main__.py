@@ -5,7 +5,7 @@ from RPG.consts.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, REGISTR
     CABIN, CAPTAIN_BRIDGE, CARGO_HOLD, COMPUTER, CREATE_SPACESHIP, ESTRAD_PORT, ESTRAD_SECURITY_SOLDIER, ESTRAD_COLONY, \
     ESTRAD_TRADER, EQUIPMENT, ESTRAD_TRADER_TRADE_MENU, ESTRAD_TRADER_BUY, ESTRAD_TRADER_SELL, ESTRAD_FOREST_ENTRY, \
     EQUIPMENT_WEAPON_INFO, EQUIPMENT_ARMOR_INFO, FIGHT_SYSTEM_PLAYER_TURN, FIGHT_SYSTEM_WEAPON_USE, ESTRAD_FOREST_FIELD, \
-    FIGHT_SYSTEM_AIM_SHOT_MENU
+    FIGHT_SYSTEM_AIM_SHOT_MENU, ESTRAD_BAR, ESTRAD_FOREST_LAKE
 
 token = os.environ.get('TOKEN')
 
@@ -55,6 +55,8 @@ def text_handle(message):
             game.estrad.security_soldier.handle(message)
         elif game.state == ESTRAD_COLONY:
             game.estrad.colony.handle(message)
+        elif game.state == ESTRAD_BAR:
+            game.estrad.bar.handle(message)
         elif game.state == ESTRAD_TRADER:
             game.estrad.trader.handle(message)
         elif game.state == ESTRAD_TRADER_TRADE_MENU:
@@ -67,6 +69,8 @@ def text_handle(message):
             game.estrad.forest.entry.handle(message)
         elif game.state == ESTRAD_FOREST_FIELD:
             game.estrad.forest.field.handle(message)
+        elif game.state == ESTRAD_FOREST_LAKE:
+            game.estrad.forest.lake.handle(message)
     elif message.text == '/start':
         games[message.chat.id] = Game(bot, games)
         games[message.chat.id].player_creation_menu.start(message)

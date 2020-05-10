@@ -1,6 +1,7 @@
 from RPG.consts.game_states import ESTRAD_COLONY
 from RPG.bot_classes.locations.base_location import BaseLocation
 from RPG.bot_classes.locations.planets.estrad.estrad_trader import EstradTrader
+from RPG.consts.quest_items import FEDERATION_PASS
 
 
 class EstradColony(BaseLocation):
@@ -19,11 +20,19 @@ class EstradColony(BaseLocation):
 
     def handle(self, message):
         if message.text == '🍻Бар':
-            pass
+            self.game.estrad.bar.start(message)
         elif message.text == '🏪Пункт выдачи снаряжения':
             self.trader.start(message)
         elif message.text == '🏕Штаб начальства':
-            pass
+            if FEDERATION_PASS in self.game.player.quest_items:
+                self.game.bot.send_message(message.chat.id, 'У тебя уже есть пропуск, тебе незачем туда идти.')
+                self.start(message)
+            else:
+                self.game.player.quest_items.append(FEDERATION_PASS)
+                self.game.bot.send_message(message.chat.id, 'Начальство колонии посвятило тебя в ряды колонизаторов '
+                                                            'планеты. Теперь у тебя есть пропуск солдата '
+                                                            'федерации.')
+                self.start(message)
         elif message.text == '🌲Лес':
             self.game.estrad.forest.entry.start(message)
         elif message.text == '🚀Назад на корабль':

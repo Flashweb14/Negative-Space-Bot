@@ -52,9 +52,9 @@ class FightSystem(BaseHandler):
         self.game.bot.send_message(message.chat.id, f'{self.enemy.name} целится...')
         sleep(2)
         self.game.bot.send_message(message.chat.id, self.enemy.attack(self.game.player, randint(4, 9), randint(1, 3)))
-        self.check_player_dead(message)
         self.player_turn.start(message)
         self.game.fight_system.check_enemy_dead(message)
+        self.check_player_dead(message)
 
     def show_action_points(self, message, reply_keyboard):
         self.game.bot.send_message(message.chat.id,
@@ -72,9 +72,9 @@ class FightSystem(BaseHandler):
                                    self.game.player.attack(self.game.fight_system.enemy, shot_accuracy, damage_coef))
         self.game.player.weapon.loaded_ammo -= ammo
         self.game.fight_system.action_points -= ap
-        self.game.fight_system.check_player_dead(message)
         self.game.fight_system.show_action_points(message, reply_keyboard)
         self.game.fight_system.check_enemy_dead(message)
+        self.game.fight_system.check_player_dead(message)
 
     def check_player_dead(self, message):
         if self.game.player.hp <= 0:

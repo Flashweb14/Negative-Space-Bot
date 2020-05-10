@@ -12,18 +12,18 @@ class Player:
         self.money = 250
 
         self.endurance = 1  # Индивидуальные параметры игрока
-        self.accuracy = 10
+        self.accuracy = 6
         self.perception = 1
         self.charisma = 1
         self.agility = 1
         self.luck = 4
 
-        self.quest_items = [FEDERATION_PASS]  # Список полученных квестовых предметов
+        self.quest_items = []  # Список полученных квестовых предметов
 
         self.inventory = [None] * 5  # Инвентарь и снаряжение
         self.weapon = None
         self.armor_set = None
-        self.laser_ammo = 100
+        self.laser_ammo = 0
 
         self.in_fight = False
 

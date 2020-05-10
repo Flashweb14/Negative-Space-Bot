@@ -13,7 +13,7 @@ class ForestEntry(BaseLocation):
 
     def handle(self, message):
         if message.text == '⬅️Налево':
-            pass
+            self.game.estrad.forest.lake.start(message)
         elif message.text == '➡️Направо':
             self.game.bot.send_message(message.chat.id,
                                        'Ты выбираешь левый путь. Пока ты углубляешься всё дальше в пучины леса, '

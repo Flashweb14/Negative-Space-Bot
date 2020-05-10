@@ -2,7 +2,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeybo
 from RPG.bot_classes.base_handler import BaseHandler
 
 
-class TradeMenu(BaseHandler):
+class TradeMenu(BaseHandler):  # Базовый класс для всех торговцев
     def __init__(self, game, npc, game_state, buy_state, sell_state, description, stock_products, factor):
         super().__init__(game, game_state)
         self.npc = npc
@@ -29,7 +29,7 @@ class TradeMenu(BaseHandler):
         else:
             self.npc.show_input_error(message)
 
-    def show_buy(self, message):
+    def show_buy(self, message):  # Выводит ассортимент
         self.game.state = self.buy_state
         trader_inline_keyboard = InlineKeyboardMarkup()
         for product in self.stock_products:
@@ -41,7 +41,7 @@ class TradeMenu(BaseHandler):
         trader_inline_keyboard.add(close_btn)
         self.game.bot.send_message(message.chat.id, '🎒Товары:', reply_markup=trader_inline_keyboard)
 
-    def handle_buy(self, call):
+    def handle_buy(self, call):  # Обрабатывает выбор предмета из ассортимента
         if call.data == 'back':
             self.game.bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
             self.game.bot.delete_message(call.message.chat.id, call.message.message_id)
@@ -59,7 +59,7 @@ class TradeMenu(BaseHandler):
             self.game.bot.delete_message(call.message.chat.id, call.message.message_id)
             self.show_buy(call.message)
 
-    def show_sell(self, message):
+    def show_sell(self, message):  # Выводит инвентарь для продажи
         self.game.state = self.sell_state
         trader_inline_keyboard = InlineKeyboardMarkup()
         for item in self.game.player.inventory:
@@ -72,7 +72,7 @@ class TradeMenu(BaseHandler):
         trader_inline_keyboard.add(close_btn)
         self.game.bot.send_message(message.chat.id, '🎒Инвентарь:', reply_markup=trader_inline_keyboard)
 
-    def handle_sell(self, call):
+    def handle_sell(self, call):  # Обрабатывает выбранный предмет из инвентаря
         if call.data == 'back':
             self.game.bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
             self.game.bot.delete_message(call.message.chat.id, call.message.message_id)

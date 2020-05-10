@@ -1,6 +1,4 @@
 from random import randint
-from RPG.consts.quest_items import FEDERATION_PASS
-from RPG.consts.weapons import LIGHT_LASER_RIFFLE
 
 
 class Player:
@@ -25,7 +23,7 @@ class Player:
         self.armor_set = None
         self.laser_ammo = 0
 
-        self.in_fight = False
+        self.in_fight = False # Находится ли игрок в бою
 
     def get_stats(self):
         stats = f'*{self.name}* 😎\n' \

@@ -1,11 +1,11 @@
 from RPG.bot_classes.base_handler import BaseHandler
-from RPG.consts.game_states import REGISTRATION
+from RPG.consts.game_states import CREATE_PLAYER_MENU
 from RPG.utilities import check_name_valid, check_player_name_taken
 
 
 class PlayerCreationMenu(BaseHandler):
     def __init__(self, game):
-        super().__init__(game, REGISTRATION)
+        super().__init__(game, CREATE_PLAYER_MENU)
 
     def show(self, message):
         self.game.bot.send_message(message.chat.id, 'Как тебя будут звать?')

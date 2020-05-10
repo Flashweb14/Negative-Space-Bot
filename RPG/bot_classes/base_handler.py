@@ -1,7 +1,7 @@
 from telebot.types import ReplyKeyboardMarkup
 
 
-class BaseHandler:
+class BaseHandler:  # Базовый обработчик, от него наследуются все классы из bot_classes
     def __init__(self, game, game_state):
         self.game = game
         self.game_state = game_state
@@ -19,4 +19,4 @@ class BaseHandler:
 
     def show_input_error(self, message):
         self.game.bot.send_message(message.chat.id, 'Введена недопустимая команда, попробуй ещё раз.',
-                                       reply_markup=self.reply_keyboard)
+                                   reply_markup=self.reply_keyboard)

@@ -1,8 +1,7 @@
 from RPG.consts.game_states import ESTRAD_TRADER, ESTRAD_TRADER_TRADE_MENU, ESTRAD_TRADER_BUY, ESTRAD_TRADER_SELL
 from RPG.bot_classes.base_dialog import BaseDialog
 from RPG.consts.quest_items import FEDERATION_PASS
-from RPG.consts.weapons import LIGHT_LASER_RIFFLE, OLD_LASER_PISTOL
-from RPG.consts.items import LITTLE_MED_PACK, LIGHT_SOLDIER_ARMOR_SET
+from RPG.consts.items import LITTLE_MED_PACK, LIGHT_SOLDIER_ARMOR_SET, LIGHT_LASER_RIFFLE, OLD_LASER_PISTOL
 from RPG.bot_classes.trader import TradeMenu
 
 

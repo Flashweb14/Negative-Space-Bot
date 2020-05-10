@@ -2,7 +2,7 @@ from telebot.types import ReplyKeyboardMarkup
 from RPG.bot_classes.base_handler import BaseHandler
 
 
-class Container(BaseHandler):
+class Container(BaseHandler):  # Базовый класс дял всех контейнеров
     def __init__(self, game, state, description, item):
         super().__init__(game, state)
         self.description = description

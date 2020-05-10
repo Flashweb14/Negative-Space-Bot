@@ -2,6 +2,7 @@ class BasePlanet:
     def __init__(self, name, description):
         self.name = name
         self.description = description
+        self.port = None
 
     def get_info(self):
         return f'*{self.name}*\n' \

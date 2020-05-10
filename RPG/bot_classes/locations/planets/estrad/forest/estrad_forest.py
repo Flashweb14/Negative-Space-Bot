@@ -1,6 +1,6 @@
-from RPG.bot_classes.locations.planets.estrad.forest.entry import ForestEntry
-from RPG.bot_classes.locations.planets.estrad.forest.field import ForestField
-from RPG.bot_classes.locations.planets.estrad.forest.lake import ForestLake
+from RPG.bot_classes.locations.planets.estrad.forest.estrad_forest_entry import ForestEntry
+from RPG.bot_classes.locations.planets.estrad.forest.estrad_forest_field import ForestField
+from RPG.bot_classes.locations.planets.estrad.forest.estrad_forest_lake import ForestLake
 
 
 class EstradForest:

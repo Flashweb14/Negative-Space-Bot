@@ -1,11 +1,11 @@
 from RPG.bot_classes.base_handler import BaseHandler
-from RPG.consts.game_states import CREATE_SPACESHIP
+from RPG.consts.game_states import CREATE_SPACESHIP_MENU
 from RPG.utilities import check_name_valid, check_spaceship_name_taken
 
 
 class SpaceshipCreationMenu(BaseHandler):
     def __init__(self, game):
-        super().__init__(game, CREATE_SPACESHIP)
+        super().__init__(game, CREATE_SPACESHIP_MENU)
 
     def show(self, message):
         self.game.bot.send_message(message.chat.id, 'Как будет называться твой космический корабль?')

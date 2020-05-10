@@ -1,6 +1,7 @@
+from RPG.bot_classes.locations.planets.estrad.colony.estrad_bar import EstradBar
 from RPG.consts.game_states import ESTRAD_COLONY
 from RPG.bot_classes.locations.base_location import BaseLocation
-from RPG.bot_classes.locations.planets.estrad.estrad_trader import EstradTrader
+from RPG.bot_classes.locations.planets.estrad.colony.estrad_trader import EstradTrader
 from RPG.consts.quest_items import FEDERATION_PASS
 
 
@@ -17,10 +18,11 @@ class EstradColony(BaseLocation):
         self.reply_keyboard.row('🚀Назад на корабль', '📟Главное меню')
 
         self.trader = EstradTrader(game)
+        self.bar = EstradBar(game)
 
     def handle(self, message):
         if message.text == '🍻Бар':
-            self.game.estrad.bar.start(message)
+            self.bar.start(message)
         elif message.text == '🏪Пункт выдачи снаряжения':
             self.trader.start(message)
         elif message.text == '🏕Штаб начальства':

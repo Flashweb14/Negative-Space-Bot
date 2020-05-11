@@ -56,7 +56,7 @@ def text_handle(message):
             game.player_profile.handle(message)
 
         elif game.state == JOURNAL:  # Журнал заданий
-            game.player.journal.handle(message)
+            game.journal.handle(message)
 
         elif game.state == EQUIPMENT:  # Снаряжение игрока
             game.equipment.handle(message)

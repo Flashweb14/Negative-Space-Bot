@@ -10,6 +10,7 @@ from RPG.bot_classes.main_menu.equipment import Equipment
 from RPG.bot_classes.main_menu.equipment_weapon_info import EquipmentWeaponInfo
 from RPG.bot_classes.main_menu.equipment_armor_info import EquipmentArmorInfo
 from RPG.bot_classes.main_menu.player_profile import PlayerProfile
+from RPG.bot_classes.main_menu.journal import Journal
 from RPG.bot_classes.locations.spaceship.spaceship import Spaceship  # Импортирует локации
 from RPG.bot_classes.locations.planets.estrad.estrad import Estrad
 from RPG.saves.data.games import DBGame
@@ -55,6 +56,7 @@ class Game:
         self.inventory = Inventory(self)
         self.inventory_item_info = InventoryItemInfo(self)
         self.player_profile = PlayerProfile(self)
+        self.journal = Journal(self)
         self.equipment = Equipment(self)
         self.equipment_weapon_info = EquipmentWeaponInfo(self)
         self.equipment_armor_info = EquipmentArmorInfo(self)

@@ -2,7 +2,7 @@ from RPG.bot_classes.base_handler import BaseHandler
 from RPG.consts.game_states import JOURNAL
 
 
-class PlayerProfile(BaseHandler):
+class Journal(BaseHandler):
     def __init__(self, game):
         super().__init__(game, JOURNAL)
         self.reply_keyboard.row('⬅ Назад')

@@ -63,9 +63,8 @@ class Computer(BaseHandler):
         elif message.text.strip() == 'plo':
             if self.game.opened_planets:
                 opened_planets = '      -' + '\n      - '.join([str(planet) for planet in self.game.opened_planets])
-                self.game.bot.send_message(message.chat.id, f'🌎*Открытые планеты*\n'
-                                                            f'{opened_planets}',
-                                           parse_mode='Markdown')
+                self.game.bot.send_message(message.chat.id, f'🌎Открытые планеты\n'
+                                                            f'{opened_planets}')
             else:
                 self.game.bot.send_message(message.chat.id, 'Вы пока не открыли ни одной планеты.',
                                            parse_mode='Markdown')

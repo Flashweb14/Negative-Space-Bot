@@ -34,7 +34,7 @@ def text_handle(message):
     if message.chat.id in games:
         game = games[message.chat.id]
         if message.text == '/credits':  # Вывод благодарностей))
-            game.bot.send_message(message.chat.id, 'Создатель - Кирилл Ковалёв'
+            game.bot.send_message(message.chat.id, 'Создатель - Кирилл Ковалёв\n'
                                                    'Огромная благодарность за помощь в тестировании проекта, развитие '
                                                    'его концепции и создание его дизайна выражается Полине Литвинкович '
                                                    'и Виктору Ладейщикову.')

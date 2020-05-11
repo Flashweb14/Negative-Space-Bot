@@ -1,4 +1,4 @@
-from os import environ
+from os import environ, path
 from telebot import TeleBot
 from RPG.bot_classes.game import Game
 # Импортирует все состояния игры
@@ -14,7 +14,7 @@ token = environ.get('TOKEN')  # Получает токен бота из кон
 
 bot = TeleBot(token)
 
-db_session.global_init(environ.get('DATABASE_URL'))
+db_session.global_init(path.join(path.dirname(__file__), './saves/db/games.db'))
 session = db_session.create_session()
 
 games = {}

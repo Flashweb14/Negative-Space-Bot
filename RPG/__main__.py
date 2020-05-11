@@ -14,7 +14,7 @@ token = environ.get('TOKEN')  # Получает токен бота из кон
 
 bot = TeleBot(token)
 
-db_session.global_init("saves/db/games.sqlite")
+db_session.global_init(environ.get('DATABASE_URL'))
 session = db_session.create_session()
 
 games = {}

@@ -14,7 +14,7 @@ class Journal(BaseHandler):
                                    reply_markup=self.reply_keyboard)
 
     def handle(self, message):
-        if message.text == '⬅Назад':
+        if message.text == '⬅ Назад':
             self.game.main_menu.start(message)
         else:
             self.show_input_error(message)

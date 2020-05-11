@@ -8,6 +8,7 @@ class BaseLocation(BaseHandler):
         self.name = name
         self.description = description
         self.enemy = enemy
+        self.child_locations = []
         self.show_message = f'*{self.name}*\n' \
                             f'{self.description}'
         self.reply_keyboard = ReplyKeyboardMarkup(True, True)

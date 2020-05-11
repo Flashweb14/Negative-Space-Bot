@@ -7,11 +7,26 @@ from RPG.consts.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, CREATE_
     ESTRAD_COLONY, ESTRAD_TRADER, EQUIPMENT, ESTRAD_TRADER_TRADE_MENU, ESTRAD_TRADER_BUY, ESTRAD_TRADER_SELL, \
     ESTRAD_FOREST_ENTRY, EQUIPMENT_WEAPON_INFO, EQUIPMENT_ARMOR_INFO, FIGHT_SYSTEM_PLAYER_TURN, \
     FIGHT_SYSTEM_WEAPON_USE, ESTRAD_FOREST_FIELD, FIGHT_SYSTEM_AIM_SHOT_MENU, ESTRAD_BAR, ESTRAD_FOREST_LAKE
+from RPG.saves.data import db_session
+from RPG.saves.data.games import DBGame
 
 token = environ.get('TOKEN')  # Получает токен бота из конфигурации
 
 bot = TeleBot(token)
+
+db_session.global_init("saves/db/games.sqlite")
+session = db_session.create_session()
+
 games = {}
+for game in session.query(DBGame).all():
+    games[game.chat_id] = Game(bot, game.chat_id, game.player_name, game.spaceship_name, game.current_location,
+                               game.state, game.player_inventory, game.player_money, game.player_hp, game.player_armor,
+                               game.player_weapon, game.player_armor_set, game.player_laser_ammo,
+                               game.fight_system_enemy, game.player_quest_items, game.fight_system_max_action_points,
+                               game.fight_system_action_points, None)
+
+for game_id in games:
+    games[game_id].games = games
 
 
 @bot.message_handler(content_types=['text'])  # Текстовый обработчик для состояний игры
@@ -81,9 +96,13 @@ def text_handle(message):
             game.estrad.forest.field.handle(message)
         elif game.state == ESTRAD_FOREST_LAKE:
             game.estrad.forest.lake.handle(message)
+        game.save(session)
     elif message.text == '/start':  # Обработчик команды /start, если игра ещё не начата
-        games[message.chat.id] = Game(bot, games)
+        games[message.chat.id] = Game(bot, message.chat.id, None, None, 'Колония', CREATE_PLAYER_MENU, '',
+                                      500, 60, 0, '', '', 0, '', None, 1, 1, games)
         games[message.chat.id].player_creation_menu.start(message)
+        game = games[message.chat.id]
+        game.save(session)
 
 
 @bot.callback_query_handler(func=lambda call: True)  # Call обработчик для состояний игры
@@ -96,6 +115,7 @@ def callback_handle(call):
         game.estrad.colony.trader.trade_menu.handle_buy(call)
     elif game.state == ESTRAD_TRADER_SELL:
         game.estrad.colony.trader.trade_menu.handle_sell(call)
+    game.save(session)
 
 
 bot.polling(none_stop=True)

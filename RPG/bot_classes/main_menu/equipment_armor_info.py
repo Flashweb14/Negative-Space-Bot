@@ -16,6 +16,7 @@ class EquipmentArmorInfo(BaseHandler):
         if message.text == '⬇️ Снять':
             if self.game.player.add_item(self.game.player.armor_set):
                 self.game.bot.send_message(message.chat.id, f'{self.game.player.armor_set.name} успешно снято!')
+                self.game.player.armor -= self.game.player.armor_set.armor
                 self.game.player.armor_set = None
             else:
                 self.game.bot.send_message(message.chat.id,
@@ -23,6 +24,7 @@ class EquipmentArmorInfo(BaseHandler):
             self.game.equipment.start(message)
         elif message.text == '✖️ Выбросить':
             self.game.bot.send_message(message.chat.id, f'{self.game.player.armor_set.name} успешно выброшено!')
+            self.game.player.armor -= self.game.player.armor_set.armor
             self.game.player.armor_set = None
             self.game.equipment.start(message)
         elif message.text == '⬅️ Назад':

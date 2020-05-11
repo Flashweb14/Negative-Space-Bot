@@ -1,4 +1,5 @@
 from random import randint
+from RPG.consts.items import items
 
 
 class Player:
@@ -23,7 +24,7 @@ class Player:
         self.armor_set = None
         self.laser_ammo = 0
 
-        self.in_fight = False # Находится ли игрок в бою
+        self.in_fight = False  # Находится ли игрок в бою
 
     def get_stats(self):
         stats = f'*{self.name}* 😎\n' \
@@ -101,3 +102,26 @@ class Player:
                 return f'Критический промах! Ты попадаешь ' \
                        f'себе в ногу и наносишь урон в размере {self.weapon.damage * shot_damage_coef} hp'
             return 'Промах!'
+
+    def inventory_to_str(self):
+        inventory = []
+        for item in self.inventory:
+            if item is not None:
+                for item_name in items:
+                    if items[item_name] == item:
+                        inventory.append(item_name)
+        return ', '.join(inventory)
+
+    def weapon_to_str(self):
+        weapon_name = None
+        for item_name in items:
+            if items[item_name] == self.weapon:
+                weapon_name = item_name
+        return weapon_name
+
+    def armor_to_str(self):
+        armor_name = None
+        for item_name in items:
+            if items[item_name] == self.armor_set:
+                armor_name = item_name
+        return armor_name

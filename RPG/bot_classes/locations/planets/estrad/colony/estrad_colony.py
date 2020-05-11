@@ -20,6 +20,8 @@ class EstradColony(BaseLocation):
         self.trader = EstradTrader(game)
         self.bar = EstradBar(game)
 
+        self.child_locations = [self.bar]
+
     def handle(self, message):
         if message.text == '🍻Бар':
             self.bar.start(message)

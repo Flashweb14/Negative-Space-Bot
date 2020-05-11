@@ -96,6 +96,12 @@ def text_handle(message):
             game.estrad.forest.field.handle(message)
         elif game.state == ESTRAD_FOREST_LAKE:
             game.estrad.forest.lake.handle(message)
+
+        elif message.text == '/credits':
+            game.bot.send_message(message.chat.id, 'Создатель - Кирилл Ковалёв'
+                                                   'Огромная благодарность за помощь в тестировании проекта, развитие '
+                                                   'его концепции и создание его дизайна выражается Полине Литвинкович '
+                                                   'и Виктору Ладейщикову.')
         game.save(session)
     elif message.text == '/start':  # Обработчик команды /start, если игра ещё не начата
         games[message.chat.id] = Game(bot, message.chat.id, None, None, 'Колония', CREATE_PLAYER_MENU, '',

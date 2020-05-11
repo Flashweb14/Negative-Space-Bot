@@ -19,6 +19,10 @@ class Estrad(BaseLocation):
         self.forest = EstradForest(game)
         self.child_locations = [self.port, self.colony, self.forest]
 
+    def get_info(self):
+        return f'*{self.name}*\n' \
+               f'{self.description}'
+
     def start(self, message):
         if self not in self.game.opened_planets:
             self.game.opened_planets.append(self)

@@ -67,7 +67,6 @@ class Game:
         self.locations_dictionary = {}
         for location in self.locations:
             self.get_child_locations(location)
-        print(self.locations_dictionary)
 
         self.current_location = self.locations_dictionary[current_location]
         self.planets = [self.estrad]
@@ -84,10 +83,8 @@ class Game:
             in_db = True
         if in_db:
             game = session.query(DBGame).filter(DBGame.chat_id == self.chat_id).first()
-            print('Изменил!')
         else:
             game = DBGame()
-            print('Добавил!')
         game.chat_id = self.chat_id
         game.player_name = self.player.name
         game.spaceship_name = self.spaceship.name

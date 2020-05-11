@@ -8,6 +8,8 @@ INVENTORY_INFO = 4
 
 PLAYER_PROFILE = 5  # Профиль игрока
 
+JOURNAL = 451  # Журнал заданий
+
 EQUIPMENT = 6  # Меню снаряжения
 EQUIPMENT_WEAPON_INFO = 7
 EQUIPMENT_ARMOR_INFO = 8

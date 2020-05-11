@@ -15,4 +15,4 @@ class PlayerProfile(BaseHandler):
         if message.text == '⬅Назад':
             self.game.main_menu.start(message)
         else:
-            self.game.bot.send_message(message.chat.id, 'Туты так низзя')
+            self.show_input_error(message)

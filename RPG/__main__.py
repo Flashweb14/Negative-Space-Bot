@@ -6,7 +6,7 @@ from RPG.consts.game_states import MAIN_MENU, INVENTORY, INVENTORY_INFO, CREATE_
     CABIN, CAPTAIN_BRIDGE, CARGO_HOLD, COMPUTER, CREATE_SPACESHIP_MENU, ESTRAD_PORT, ESTRAD_SECURITY_SOLDIER, \
     ESTRAD_COLONY, ESTRAD_TRADER, EQUIPMENT, ESTRAD_TRADER_TRADE_MENU, ESTRAD_TRADER_BUY, ESTRAD_TRADER_SELL, \
     ESTRAD_FOREST_ENTRY, EQUIPMENT_WEAPON_INFO, EQUIPMENT_ARMOR_INFO, FIGHT_SYSTEM_PLAYER_TURN, \
-    FIGHT_SYSTEM_WEAPON_USE, ESTRAD_FOREST_FIELD, FIGHT_SYSTEM_AIM_SHOT_MENU, ESTRAD_BAR, ESTRAD_FOREST_LAKE
+    FIGHT_SYSTEM_WEAPON_USE, ESTRAD_FOREST_FIELD, FIGHT_SYSTEM_AIM_SHOT_MENU, ESTRAD_BAR, ESTRAD_FOREST_LAKE, JOURNAL
 from RPG.saves.data import db_session
 from RPG.saves.data.games import DBGame
 
@@ -33,7 +33,13 @@ for game_id in games:
 def text_handle(message):
     if message.chat.id in games:
         game = games[message.chat.id]
-        if game.state == CREATE_PLAYER_MENU:  # Регистрация пользователя, выбор имени и названия корабля
+        if message.text == '/credits':  # Вывод благодарностей))
+            game.bot.send_message(message.chat.id, 'Создатель - Кирилл Ковалёв'
+                                                   'Огромная благодарность за помощь в тестировании проекта, развитие '
+                                                   'его концепции и создание его дизайна выражается Полине Литвинкович '
+                                                   'и Виктору Ладейщикову.')
+
+        elif game.state == CREATE_PLAYER_MENU:  # Регистрация пользователя, выбор имени и названия корабля
             game.player_creation_menu.handle(message)
         elif game.state == CREATE_SPACESHIP_MENU:
             game.spaceship_creation_menu.handle(message)
@@ -48,6 +54,9 @@ def text_handle(message):
 
         elif game.state == PLAYER_PROFILE:  # Профиль игрока
             game.player_profile.handle(message)
+
+        elif game.state == JOURNAL:  # Журнал заданий
+            game.player.journal.handle(message)
 
         elif game.state == EQUIPMENT:  # Снаряжение игрока
             game.equipment.handle(message)
@@ -97,12 +106,7 @@ def text_handle(message):
         elif game.state == ESTRAD_FOREST_LAKE:
             game.estrad.forest.lake.handle(message)
 
-        elif message.text == '/credits':
-            game.bot.send_message(message.chat.id, 'Создатель - Кирилл Ковалёв'
-                                                   'Огромная благодарность за помощь в тестировании проекта, развитие '
-                                                   'его концепции и создание его дизайна выражается Полине Литвинкович '
-                                                   'и Виктору Ладейщикову.')
-        game.save(session)
+        game.save(session)  # Сохранение игры в базу данных
     elif message.text == '/start':  # Обработчик команды /start, если игра ещё не начата
         games[message.chat.id] = Game(bot, message.chat.id, None, None, 'Колония', CREATE_PLAYER_MENU, '',
                                       500, 60, 0, '', '', 0, '', None, 1, 1, games)

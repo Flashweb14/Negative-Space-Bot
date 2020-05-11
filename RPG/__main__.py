@@ -108,7 +108,7 @@ def text_handle(message):
 
         game.save(session)  # Сохранение игры в базу данных
     elif message.text == '/start':  # Обработчик команды /start, если игра ещё не начата
-        games[message.chat.id] = Game(bot, message.chat.id, None, None, 'Колония', CREATE_PLAYER_MENU, '',
+        games[message.chat.id] = Game(bot, message.chat.id, None, None, 'Личная каюта', CREATE_PLAYER_MENU, '',
                                       500, 60, 0, '', '', 0, '', None, 1, 1, games)
         games[message.chat.id].player_creation_menu.start(message)
         game = games[message.chat.id]
